@@ -1,6 +1,8 @@
 package ejercicio1;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Clase GestorCriticas
@@ -14,6 +16,9 @@ public class GestorCriticas {
 	 * Instancia única del gestor de críticas.
 	 */
 	private static GestorCriticas instance = null;
+	
+	private ArrayList<Espectador> espectadores;
+	private ArrayList<Critica> criticas;
 	
 	/**
 	 * Constructor del gestor de críticas.
@@ -34,8 +39,12 @@ public class GestorCriticas {
 		return instance;
 	}
 	
-	public void altaUsuario() {
-		
+	public void altaUsuario(String nombre, String apellidos, String nick, String correo) {
+		Espectador usuario = new Espectador();
+		usuario.setNombre(nombre);
+		usuario.setApellidos(apellidos);
+		usuario.setUsuario(nick);
+		usuario.setCorreo(correo);
 	}
 	
 	public void bajaUsuario() {
@@ -71,4 +80,22 @@ public class GestorCriticas {
 		
 	}
 	
+	public Boolean comprobarFormatoCorreo(String correo){
+		Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z]{2,})$");
+		Matcher comparador = patron.matcher(correo);
+		
+		return comparador.find();
+	}
+	
+	public Boolean correoRegistrado(String correo){
+		Boolean bandera = false;
+		
+		for(Espectador e : espectadores){
+			if(e.getCorreo().equals(correo)){
+				bandera = true;
+			}
+		}
+		
+		return bandera;
+	}
 }
