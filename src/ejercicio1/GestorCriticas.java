@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Clase GestorCriticas Esta clase tiene los métodos necesarios para gestionar
- * las críticas y los usuarios.
+ * Clase GestorCriticas Esta clase tiene los mï¿½todos necesarios para gestionar
+ * las crï¿½ticas y los usuarios.
  * 
  * @author Antonio Cabezas Jarabo
  * @version 1.0, 24/09/2021
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class GestorCriticas {
 
 	/**
-	 * Instancia única del gestor de críticas.
+	 * Instancia ï¿½nica del gestor de crï¿½ticas.
 	 */
 	private static GestorCriticas instance = null;
 
@@ -22,18 +22,18 @@ public class GestorCriticas {
 	private ArrayList<Critica> criticas;
 
 	/**
-	 * Constructor del gestor de críticas. Es privado para que sólo haya un
-	 * único gestor.
+	 * Constructor del gestor de crï¿½ticas. Es privado para que sï¿½lo haya un
+	 * ï¿½nico gestor.
 	 */
 	private GestorCriticas() {
 
 	}
 
 	/**
-	 * Este método controla que haya únicamente un gestor de críticas.
+	 * Este mï¿½todo controla que haya ï¿½nicamente un gestor de crï¿½ticas.
 	 * 
-	 * @return El gestor de críticas.
-	 * @author Noelia Hinojosa Sánchez
+	 * @return El gestor de crï¿½ticas.
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public static GestorCriticas getInstance() {
 		if (instance == null) {
@@ -43,13 +43,13 @@ public class GestorCriticas {
 	}
 
 	/**
-	 * Este método da de alta a un usuario en el sistema.
+	 * Este mï¿½todo da de alta a un usuario en el sistema.
 	 * @param nombre Nombre del usuario.
 	 * @param apellidos Apellidos del usuario.
 	 * @param nick Nombre de usuario o nick.
-	 * @param correo Correo eléctronico único del usuario.
+	 * @param correo Correo elï¿½ctronico ï¿½nico del usuario.
 	 * @return Nada.
-	 * @author Noelia Hinojosa Sánchez
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public void altaUsuario(String nombre, String apellidos, String nick, String correo) {
 		Espectador usuario = new Espectador();
@@ -60,10 +60,10 @@ public class GestorCriticas {
 	}
 
 	/**
-	 * Este método da de baja a un usuario del sistema.
-	 * @param correo Correo eléctronico del usuario.
+	 * Este mï¿½todo da de baja a un usuario del sistema.
+	 * @param correo Correo elï¿½ctronico del usuario.
 	 * @return Nada.
-	 * @author Noelia Hinojosa Sánchez
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public void bajaUsuario(String correo) {
 		Espectador usuario = new Espectador();
@@ -94,36 +94,57 @@ public class GestorCriticas {
 	}
 
 	/**
-	 * Este método crea una nueva crítica de un espectáculo.
-	 * @param titulo Título de la crítica.
-	 * @param puntuacion Puntuación asignada al espectáculo.
-	 * @param reseña Comentario del espectáculo.
-	 * @param correo Correo eléctronico del usuario.
+	 * Este mï¿½todo crea una nueva crï¿½tica de un espectï¿½culo.
+	 * @param titulo Tï¿½tulo de la crï¿½tica.
+	 * @param puntuacion Puntuaciï¿½n asignada al espectï¿½culo.
+	 * @param reseï¿½a Comentario del espectï¿½culo.
+	 * @param correo Correo elï¿½ctronico del usuario.
 	 * @return Nada.
-	 * @author Noelia Hinojosa Sánchez
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
-	public void creaCritica(String titulo, int puntuacion, String reseña, String correo) {
+	public void creaCritica(String titulo, int puntuacion, String reseÃ±a, String correo) {
 		Critica critica = new Critica();
 		critica.setTitulo(titulo);
 		critica.setPuntuacion(puntuacion);
-		critica.setReseña(reseña);
+		critica.setReseÃ±a(reseÃ±a);
 		critica.setCorreoPropietario(correo);
 	}
 
 	/**
-	 * Este método devuelve todas las críticas guardadas en el sistema, para posteriormente mostrarselas al usuario.
-	 * @return Lista con todas las críticas del sistema.
-	 * @author Noelia Hinojosa Sánchez
+	 * Este mï¿½todo devuelve todas las crï¿½ticas guardadas en el sistema, para posteriormente mostrarselas al usuario.
+	 * @return Lista con todas las crï¿½ticas del sistema.
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public ArrayList<Critica> getCriticas() {
+		
 		return criticas;
 	}
+	
+	/**
+	 * Este metodo borra una critica .
+	 * @param index Borra una critica.
+	 * @author Rafael Piqueras Espinar
+	 */
 
-	public void borraCritica() {
+	public void borraCritica(int index) {
+		criticas.remove(index);
 
 	}
+	
+	/**
+	 * Este metodo es para votar una critica de usuario
+	 * @param index
+	 * @param correo 
+	 * @param puntuacion
+	 * @author Rafael Piqueras Espinar
+	 */
 
-	public void votaCritica() {
+	public void votaCritica(int index, String correo, int puntuacion) {
+			ArrayList<Valoraciones> valoracion = criticas.get(index).getValoraciones(); 
+			Valoraciones valoracion1 = new Valoraciones();
+			valoracion1.setCorreo(correo);
+			valoracion1.setValoracion(puntuacion);
+			
 
 	}
 
@@ -132,10 +153,10 @@ public class GestorCriticas {
 	}
 
 	/**
-	 * Este método comprueba que el correo eléctronico pasado tenga un formato válido.
-	 * @param correo Correo eléctronico a comprobar.
+	 * Este mï¿½todo comprueba que el correo elï¿½ctronico pasado tenga un formato vï¿½lido.
+	 * @param correo Correo elï¿½ctronico a comprobar.
 	 * @return True si el formato es correcto.
-	 * @author Noelia Hinojosa Sánchez
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public Boolean comprobarFormatoCorreo(String correo) {
 		Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z]{2,})$");
@@ -145,10 +166,10 @@ public class GestorCriticas {
 	}
 
 	/**
-	 * Este método comprueba si un correo eléctronico ya se encuentra registrado en el sistema.
-	 * @param correo Correo eléctronico a comprobar.
-	 * @return True si el correo ya está registrado.
-	 * @author Noelia Hinojosa Sánchez
+	 * Este mï¿½todo comprueba si un correo elï¿½ctronico ya se encuentra registrado en el sistema.
+	 * @param correo Correo elï¿½ctronico a comprobar.
+	 * @return True si el correo ya estï¿½ registrado.
+	 * @author Noelia Hinojosa Sï¿½nchez
 	 */
 	public Boolean correoRegistrado(String correo) {
 		Boolean bandera = false;
