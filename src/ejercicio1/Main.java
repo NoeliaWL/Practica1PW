@@ -46,17 +46,7 @@ public class Main {
 			//cargarFichero Criticas.txt
 			
 			do {
-				System.out.println("Elija una opción:");
-				System.out.println("1. Dar de alta a un usuario");
-				System.out.println("2. Dar de baja a un usuario");
-				System.out.println("3. Actualizar los datos del usuario");
-				System.out.println("4. Consultar los datos del usuario");
-				System.out.println("5. Crear una crítica");
-				System.out.println("6. Consultar todas las críticas disponibles");
-				System.out.println("7. Borrar una crítica");
-				System.out.println("8. Votar la utilidad de una crítica");
-				System.out.println("9. Buscar las críticas de un usuario");
-				System.out.println("10. Salir");
+				menu();
 				numero = reader.nextInt();
 				switch (numero) {
 					case 1:
@@ -69,13 +59,34 @@ public class Main {
 						System.out.println("Introduzca su correo eléctronico: ");
 						correo = reader.nextLine();
 						
-						if(gestorcriticas.comprobarFormatoCorreo(correo) && !gestorcriticas.correoRegistrado(correo)){
-							gestorcriticas.altaUsuario(nombre, apellidos, nick, correo);
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								gestorcriticas.altaUsuario(nombre, apellidos, nick, correo);
+							}
+							else{
+								System.out.println("Correo eléctronico ya registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no válido");
 						}
 						break;
 						
 					case 2:
-						gestorcriticas.bajaUsuario();
+						System.out.println("Introduzca el correo eléctronico: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								gestorcriticas.bajaUsuario(correo);
+							}
+							else{
+								System.out.println("Correo eléctronico no registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no válido");
+						}
 						break;
 						
 					case 3:						
@@ -88,8 +99,16 @@ public class Main {
 						System.out.println("Introduzca su correo eléctronico: ");
 						correo = reader.nextLine();
 						
-						if(gestorcriticas.comprobarFormatoCorreo(correo) && gestorcriticas.correoRegistrado(correo)){
-							gestorcriticas.actualizarDatosUsuario(nombre, apellidos, nick, correo);
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								gestorcriticas.actualizarDatosUsuario(nombre, apellidos, nick, correo);
+							}
+							else{
+								System.out.println("Correo eléctronico no registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no válido");
 						}
 						break;
 						
@@ -97,13 +116,21 @@ public class Main {
 						System.out.println("Introduzca su correo eléctronico: ");
 						correo = reader.nextLine();
 						
-						if(gestorcriticas.comprobarFormatoCorreo(correo) && gestorcriticas.correoRegistrado(correo)) {
-							user = gestorcriticas.getUsuario(correo);
-							
-							System.out.println("Nombre: " + user.getNombre());
-							System.out.println("Apellidos: " + user.getApellidos());
-							System.out.println("Nickname: " + user.getUsuario());
-							System.out.println("Correo electrónico: " + user.getCorreo());
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								user = gestorcriticas.getUsuario(correo);
+								
+								System.out.println("Nombre: " + user.getNombre());
+								System.out.println("Apellidos: " + user.getApellidos());
+								System.out.println("Nickname: " + user.getUsuario());
+								System.out.println("Correo electrónico: " + user.getCorreo());
+							}
+							else{
+								System.out.println("Correo eléctronico no registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no válido");
 						}
 						break;
 						
@@ -143,5 +170,19 @@ public class Main {
 				reader.close();
 			}
 		}
+	}
+	
+	public static void menu(){
+		System.out.println("Elija una opción:");
+		System.out.println("1. Dar de alta a un usuario");
+		System.out.println("2. Dar de baja a un usuario");
+		System.out.println("3. Actualizar los datos del usuario");
+		System.out.println("4. Consultar los datos del usuario");
+		System.out.println("5. Crear una crítica");
+		System.out.println("6. Consultar todas las críticas disponibles");
+		System.out.println("7. Borrar una crítica");
+		System.out.println("8. Votar la utilidad de una crítica");
+		System.out.println("9. Buscar las críticas de un usuario");
+		System.out.println("10. Salir");
 	}
 }

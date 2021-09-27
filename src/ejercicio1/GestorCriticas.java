@@ -47,8 +47,12 @@ public class GestorCriticas {
 		usuario.setCorreo(correo);
 	}
 	
-	public void bajaUsuario() {
-		
+	public void bajaUsuario(String correo) {
+		Espectador usuario = new Espectador();
+		usuario = getUsuario(correo);
+		if(usuario != null){
+			espectadores.remove(usuario);
+		}
 	}
 	
 	public Espectador getUsuario(String correo) {		
