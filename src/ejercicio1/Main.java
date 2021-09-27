@@ -25,6 +25,7 @@ public class Main {
 		int numero = 0;
 		Scanner reader = new Scanner(System.in);
 		String nombre, apellidos, nick, correo;
+		Espectador user;
 		
 		Properties prop = new Properties();
 		String filename = "fichero.properties";
@@ -77,12 +78,33 @@ public class Main {
 						gestorcriticas.bajaUsuario();
 						break;
 						
-					case 3:
-						gestorcriticas.setUsuario();
+					case 3:						
+						System.out.println("Introduzca su nuevo nombre: ");
+						nombre = reader.nextLine();
+						System.out.println("Introduzca sus nuevos apellidos: ");
+						apellidos = reader.nextLine();
+						System.out.println("Introduzca su nuevo nick(nombre de usuario): ");
+						nick = reader.nextLine();
+						System.out.println("Introduzca su correo eléctronico: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo) && gestorcriticas.correoRegistrado(correo)){
+							gestorcriticas.actualizarDatosUsuario(nombre, apellidos, nick, correo);
+						}
 						break;
 						
 					case 4:
-						gestorcriticas.getUsuario();
+						System.out.println("Introduzca su correo eléctronico: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo) && gestorcriticas.correoRegistrado(correo)) {
+							user = gestorcriticas.getUsuario(correo);
+							
+							System.out.println("Nombre: " + user.getNombre());
+							System.out.println("Apellidos: " + user.getApellidos());
+							System.out.println("Nickname: " + user.getUsuario());
+							System.out.println("Correo electrónico: " + user.getCorreo());
+						}
 						break;
 						
 					case 5:

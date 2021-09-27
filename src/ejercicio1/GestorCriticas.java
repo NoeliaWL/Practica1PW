@@ -51,13 +51,24 @@ public class GestorCriticas {
 		
 	}
 	
-	public Espectador getUsuario() {
-		Espectador user;
-		return user;
+	public Espectador getUsuario(String correo) {		
+		Espectador usuario = new Espectador();
+		for (Espectador e : espectadores) {
+			if (e.getCorreo().equals(correo)) {
+				usuario = e;
+			}
+		}
+		return usuario;
 	}
 	
-	public void setUsuario() {
-		
+	public void actualizarDatosUsuario(String nombre, String apellidos, String nick, String correo) {
+		for (Espectador e : espectadores) {
+			if (e.getCorreo().equals(correo)) {
+				e.setNombre(nombre);
+				e.setApellidos(apellidos);
+				e.setUsuario(nick);
+			}
+		}
 	}
 	
 	public void creaCritica() {
