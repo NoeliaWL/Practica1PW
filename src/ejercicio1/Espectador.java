@@ -1,44 +1,92 @@
 package ejercicio1;
 
+/**
+ * Clase espectador 
+ * Esta clase tiene los metodos necesarios para gestionar todos los datos de un espectador.
+ * @author rafael piqueras espinar
+ *
+ */
+
 public class Espectador {
 
 	private String nombre;
 	private String apellidos;
 	private String usuario;
-	private String email;
+	private String correo;
+	
+	/**
+	 * Este método devuelve el nombre de usuario.
+	 * @return Nombre de usuario. 
+	 */
 
 	public String getNombre() {
 		return nombre;
 	}
-
+	
+	/**
+	 * Este metodo asigna el nombre de usuario.
+	 * @param nombre Nombre de usuario.
+	 */
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 
 	}
-
+	
+	/**
+	 * Este método devuelve los apellidos del usuario.
+	 * @return Apellidos del usuario.
+	 */
+	
 	public String getApellidos() {
 		return apellidos;
 
 	}
-
+	
+	/**
+	 * Este metodo asigna los apellidos de usuario
+	 * @param apellidos Apellidos usuario
+	 */
+	
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
+	/**
+	 * Este metodo devuelve el usuario.
+	 * @return Usuario
+	 */
+	
 	public String getUsuario() {
 		return usuario;
 	}
-
+	
+	/**
+	 * Este metodo asigna un usuario
+	 * @param usuario Usuario
+	 */
+	
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
+	
+	/**
+	 * Este metodo devuelve el correo del usuario
+	 * @return Correo del usuario
+	 */
+	
 	public String getCorreo() {
-		return email;
+		return correo;
 	}
 
-	public void setCorreo(String email) {
-		this.email = email;
+	/**
+	 * Este metodo asigna el correo de un usario
+	 * @param correo Correo usuario
+	 */
+	
+	public void setCorreo(String correo) {
+		this.correo = correo;
 
 	}
 }
+
