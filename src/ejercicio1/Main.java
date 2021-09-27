@@ -25,8 +25,9 @@ public class Main {
 		
 		int numero = 0;
 		Scanner reader = new Scanner(System.in);
-		String nombre, apellidos, nick, correo, titulo, reseña;
+		String nombre, apellidos, nick, correo, titulo, reseÃ±a;
 		int puntuacion;
+		int index;
 		Espectador user;
 		ArrayList<Critica> criticas;
 		
@@ -59,7 +60,7 @@ public class Main {
 						apellidos = reader.nextLine();
 						System.out.println("Introduzca su nick(nombre de usuario): ");
 						nick = reader.nextLine();
-						System.out.println("Introduzca su correo eléctronico: ");
+						System.out.println("Introduzca su correo elï¿½ctronico: ");
 						correo = reader.nextLine();
 						
 						if(gestorcriticas.comprobarFormatoCorreo(correo)){
@@ -67,16 +68,16 @@ public class Main {
 								gestorcriticas.altaUsuario(nombre, apellidos, nick, correo);
 							}
 							else{
-								System.out.println("Correo eléctronico ya registrado");
+								System.out.println("Correo elï¿½ctronico ya registrado");
 							}
 						}
 						else{
-							System.out.println("Formato de correo no válido");
+							System.out.println("Formato de correo no vï¿½lido");
 						}
 						break;
 						
 					case 2:
-						System.out.println("Introduzca el correo eléctronico: ");
+						System.out.println("Introduzca el correo elï¿½ctronico: ");
 						correo = reader.nextLine();
 						
 						if(gestorcriticas.comprobarFormatoCorreo(correo)){
@@ -84,11 +85,11 @@ public class Main {
 								gestorcriticas.bajaUsuario(correo);
 							}
 							else{
-								System.out.println("Correo eléctronico no registrado");
+								System.out.println("Correo elï¿½ctronico no registrado");
 							}
 						}
 						else{
-							System.out.println("Formato de correo no válido");
+							System.out.println("Formato de correo no vï¿½lido");
 						}
 						break;
 						
@@ -99,7 +100,7 @@ public class Main {
 						apellidos = reader.nextLine();
 						System.out.println("Introduzca su nuevo nick(nombre de usuario): ");
 						nick = reader.nextLine();
-						System.out.println("Introduzca su correo eléctronico: ");
+						System.out.println("Introduzca su correo elï¿½ctronico: ");
 						correo = reader.nextLine();
 						
 						if(gestorcriticas.comprobarFormatoCorreo(correo)){
@@ -107,16 +108,16 @@ public class Main {
 								gestorcriticas.actualizarDatosUsuario(nombre, apellidos, nick, correo);
 							}
 							else{
-								System.out.println("Correo eléctronico no registrado");
+								System.out.println("Correo elï¿½ctronico no registrado");
 							}
 						}
 						else{
-							System.out.println("Formato de correo no válido");
+							System.out.println("Formato de correo no vï¿½lido");
 						}
 						break;
 						
 					case 4:
-						System.out.println("Introduzca su correo eléctronico: ");
+						System.out.println("Introduzca su correo elï¿½ctronico: ");
 						correo = reader.nextLine();
 						
 						if(gestorcriticas.comprobarFormatoCorreo(correo)){
@@ -126,38 +127,38 @@ public class Main {
 								System.out.println("Nombre: " + user.getNombre());
 								System.out.println("Apellidos: " + user.getApellidos());
 								System.out.println("Nickname: " + user.getUsuario());
-								System.out.println("Correo electrónico: " + user.getCorreo());
+								System.out.println("Correo electrï¿½nico: " + user.getCorreo());
 							}
 							else{
-								System.out.println("Correo eléctronico no registrado");
+								System.out.println("Correo elï¿½ctronico no registrado");
 							}
 						}
 						else{
-							System.out.println("Formato de correo no válido");
+							System.out.println("Formato de correo no vï¿½lido");
 						}
 						break;
 						
 					case 5:
-						System.out.println("Introduzca su correo eléctronico: ");
+						System.out.println("Introduzca su correo elï¿½ctronico: ");
 						correo = reader.nextLine();
 						
 						if(gestorcriticas.comprobarFormatoCorreo(correo)){
 							if(gestorcriticas.correoRegistrado(correo)){
-								System.out.println("Introduzca el título de la crítica: ");
+								System.out.println("Introduzca el tï¿½tulo de la crï¿½tica: ");
 								titulo = reader.nextLine();
-								System.out.println("Introduzca la puntuación dada al espectáculo: ");
+								System.out.println("Introduzca la puntuaciï¿½n dada al espectï¿½culo: ");
 								puntuacion = Integer.parseInt(reader.nextLine());
-								System.out.println("Introduzca la reseña del espectáculo: ");
-								reseña = reader.nextLine();
+								System.out.println("Introduzca la reseï¿½a del espectï¿½culo: ");
+								reseÃ±a = reader.nextLine();
 								
-								gestorcriticas.creaCritica(titulo, puntuacion, reseña, correo);
+								gestorcriticas.creaCritica(titulo, puntuacion, reseÃ±a, correo);
 							}
 							else{
-								System.out.println("Correo eléctronico no registrado");
+								System.out.println("Correo elï¿½ctronico no registrado");
 							}
 						}
 						else{
-							System.out.println("Formato de correo no válido");
+							System.out.println("Formato de correo no vï¿½lido");
 						}
 						break;
 						
@@ -165,26 +166,60 @@ public class Main {
 						criticas = gestorcriticas.getCriticas();
 						for(Critica c : criticas){
 							System.out.println("Titulo: " + c.getTitulo());
-							System.out.println("Puntuación: " + c.getPuntuacion());
-							System.out.println("Reseña: " + c.getReseña());
+							System.out.println("PuntuaciÃ³n: " + c.getPuntuacion());
+							System.out.println("ReseÃ±a: " + c.getReseÃ±a());
 							System.out.println("Valoraciones: ");
 							for(Valoraciones v : c.getValoraciones()){
-								//Mostrar valoraciones ¿Como hacerlo?
+								//Mostrar valoraciones ï¿½Como hacerlo?
 							}
 						}
 						break;
 						
 					case 7:
-						gestorcriticas.borraCritica();
+						gestorcriticas.getCriticas();
+						index = Integer.parseInt(reader.nextLine());
+						gestorcriticas.borraCritica(index);
 						break;
 						
 					case 8:
-						gestorcriticas.votaCritica();
+						System.out.println("Introduzca el correo elï¿½ctronico: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								gestorcriticas.votaCritica(index,correo,puntuacion);
+							}
+							else{
+								System.out.println("Correo elï¿½ctronico no registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no vï¿½lido");
+						}
 						break;
 						
+						
 					case 9:
-						gestorcriticas.buscaCritica();
+						System.out.println("Introduzca el usuario: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								gestorcriticas.buscaCritica(correo);
+							}
+							else{
+								System.out.println("Usuario no registrado");
+							}
+						}
+							else {
+								System.out.println("Formato de usuario no valido");
+							}
+						}
+						
 						break;
+						
+
+					
 				}
 			} while ((numero >= 1) && (numero <= 9));
 		}
@@ -205,16 +240,16 @@ public class Main {
 	}
 	
 	public static void menu(){
-		System.out.println("Elija una opción:");
+		System.out.println("Elija una opciï¿½n:");
 		System.out.println("1. Dar de alta a un usuario");
 		System.out.println("2. Dar de baja a un usuario");
 		System.out.println("3. Actualizar los datos del usuario");
 		System.out.println("4. Consultar los datos del usuario");
-		System.out.println("5. Crear una crítica");
-		System.out.println("6. Consultar todas las críticas disponibles");
-		System.out.println("7. Borrar una crítica");
-		System.out.println("8. Votar la utilidad de una crítica");
-		System.out.println("9. Buscar las críticas de un usuario");
+		System.out.println("5. Crear una crï¿½tica");
+		System.out.println("6. Consultar todas las crï¿½ticas disponibles");
+		System.out.println("7. Borrar una crï¿½tica");
+		System.out.println("8. Votar la utilidad de una crï¿½tica");
+		System.out.println("9. Buscar las crï¿½ticas de un usuario");
 		System.out.println("10. Salir");
 	}
 }

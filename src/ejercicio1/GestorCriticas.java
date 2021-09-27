@@ -21,6 +21,10 @@ public class GestorCriticas {
 	private ArrayList<Espectador> espectadores;
 	private ArrayList<Critica> criticas;
 
+	
+
+
+
 	/**
 	 * Constructor del gestor de cr�ticas. Es privado para que s�lo haya un
 	 * �nico gestor.
@@ -132,10 +136,10 @@ public class GestorCriticas {
 	}
 	
 	/**
-	 * Este metodo es para votar una critica de usuario
+	 * Este metodo es para votar una critica de usuario.
 	 * @param index
-	 * @param correo 
-	 * @param puntuacion
+	 * @param correo Correo electronico del usuario.
+	 * @param puntuacion Puntua una critica.
 	 * @author Rafael Piqueras Espinar
 	 */
 
@@ -147,9 +151,20 @@ public class GestorCriticas {
 			
 
 	}
+	/**
+	 * Este metodo devuelve la lista de criticas de usuario.
+	 * @param correo Correo electronico del usuario.
+	 * @return lista con las criticas de un usuario.
+	 * @autor Rafael Piquers Espinar
+	 */
 
-	public ArrayList<Critica> buscaCritica() {
-		return criticas; //Para que no de error mientras
+	public ArrayList<Critica> buscaCritica(String correo) {
+		ArrayList<Critica> criticaUsuario = new ArrayList<Critica>();
+		for ( Critica e : criticas)
+			if(e.getCorreoPropietario().equals(correo))
+			criticaUsuario.add(e);
+		
+		return criticaUsuario;
 	}
 
 	/**
