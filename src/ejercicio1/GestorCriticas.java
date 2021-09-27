@@ -75,7 +75,7 @@ public class GestorCriticas {
 		}
 	}
 	
-	public void creaCritica() {
+	public void creaCritica(String titulo, int puntuacion, String reseña) {
 		
 	}
 	

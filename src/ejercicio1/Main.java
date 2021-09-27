@@ -24,7 +24,8 @@ public class Main {
 		
 		int numero = 0;
 		Scanner reader = new Scanner(System.in);
-		String nombre, apellidos, nick, correo;
+		String nombre, apellidos, nick, correo, titulo, reseña;
+		int puntuacion;
 		Espectador user;
 		
 		Properties prop = new Properties();
@@ -135,7 +136,27 @@ public class Main {
 						break;
 						
 					case 5:
-						gestorcriticas.creaCritica();
+						System.out.println("Introduzca su correo eléctronico: ");
+						correo = reader.nextLine();
+						
+						if(gestorcriticas.comprobarFormatoCorreo(correo)){
+							if(gestorcriticas.correoRegistrado(correo)){
+								System.out.println("Introduzca el título de la crítica: ");
+								titulo = reader.nextLine();
+								System.out.println("Introduzca la puntuación dada al espectáculo: ");
+								puntuacion = Integer.parseInt(reader.nextLine());
+								System.out.println("Introduzca la reseña del espectáculo: ");
+								reseña = reader.nextLine();
+								
+								gestorcriticas.creaCritica(titulo, puntuacion, reseña);
+							}
+							else{
+								System.out.println("Correo eléctronico no registrado");
+							}
+						}
+						else{
+							System.out.println("Formato de correo no válido");
+						}
 						break;
 						
 					case 6:
