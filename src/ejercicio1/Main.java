@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class Main {
 		String nombre, apellidos, nick, correo, titulo, reseña;
 		int puntuacion;
 		Espectador user;
+		ArrayList<Critica> criticas;
 		
 		Properties prop = new Properties();
 		String filename = "fichero.properties";
@@ -148,7 +150,7 @@ public class Main {
 								System.out.println("Introduzca la reseña del espectáculo: ");
 								reseña = reader.nextLine();
 								
-								gestorcriticas.creaCritica(titulo, puntuacion, reseña);
+								gestorcriticas.creaCritica(titulo, puntuacion, reseña, correo);
 							}
 							else{
 								System.out.println("Correo eléctronico no registrado");
@@ -160,7 +162,16 @@ public class Main {
 						break;
 						
 					case 6:
-						gestorcriticas.getCriticas();
+						criticas = gestorcriticas.getCriticas();
+						for(Critica c : criticas){
+							System.out.println("Titulo: " + c.getTitulo());
+							System.out.println("Puntuación: " + c.getPuntuacion());
+							System.out.println("Reseña: " + c.getReseña());
+							System.out.println("Valoraciones: ");
+							for(Valoraciones v : c.getValoraciones()){
+								//Mostrar valoraciones ¿Como hacerlo?
+							}
+						}
 						break;
 						
 					case 7:
