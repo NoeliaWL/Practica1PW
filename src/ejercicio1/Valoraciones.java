@@ -1,32 +1,39 @@
 package ejercicio1;
 
+/**
+ * Clase Valoraciones Esta clase maneja la informacion necesaria sobre las
+ * valoraciones de una critica.
+ * 
+ * @author Noelia Hinojosa Sanchez
+ * @version 1.0, 27/09/2021
+ */
 public class Valoraciones {
 	/**
-	 * Correo eléctronico del usuario que valora una crítica
+	 * Correo electronico del usuario que valora una critica.
 	 */
 	private String correo;
 
 	/**
-	 * Puntuación asignada a una crítica
+	 * Puntuacion asignada a una critica.
 	 */
 	private int valoracion;
 
 	/**
-	 * Este método devuelve el correo eléctronico del usuario que valoró una
-	 * crítica.
+	 * Este metodo devuelve el correo electronico del usuario que valoro una
+	 * critica.
 	 * 
-	 * @return Correo eléctronico del usuario
+	 * @return Correo electronico del usuario.
 	 */
 	public String getCorreo() {
 		return correo;
 	}
 
 	/**
-	 * Este método asigna el correo eléctronico del usuario que valoró una
-	 * crítica.
+	 * Este metodo asigna el correo electronico del usuario que valoro una
+	 * critica.
 	 * 
 	 * @param correo
-	 *            Correo eléctronico del usuario
+	 *            Correo electronico del usuario.
 	 * @return Nada.
 	 */
 	public void setCorreo(String correo) {
@@ -34,19 +41,19 @@ public class Valoraciones {
 	}
 
 	/**
-	 * Este método devuelve la valoración de la crítica.
+	 * Este metodo devuelve la valoracion de la critica.
 	 * 
-	 * @return Puntuación de la crítica
+	 * @return Puntuación de la critica.
 	 */
 	public int getValoracion() {
 		return valoracion;
 	}
 
 	/**
-	 * Este método asigna la puntuación a la crítica.
+	 * Este metodo asigna la puntuacion a la critica.
 	 * 
 	 * @param valoracion
-	 *            Puntuación de la crítica.
+	 *            Puntuacion de la critica.
 	 * @return Nada.
 	 */
 	public void setValoracion(int valoracion) {

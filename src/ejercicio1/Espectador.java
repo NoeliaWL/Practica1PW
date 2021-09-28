@@ -1,10 +1,11 @@
 package ejercicio1;
 
 /**
- * Clase espectador 
- * Esta clase tiene los metodos necesarios para gestionar todos los datos de un espectador.
+ * Clase espectador Esta clase tiene los metodos necesarios para gestionar todos
+ * los datos de un espectador.
+ * 
  * @author rafael piqueras espinar
- *
+ * @version 1.0, 24/09/2021
  */
 
 public class Espectador {
@@ -13,80 +14,91 @@ public class Espectador {
 	private String apellidos;
 	private String usuario;
 	private String correo;
-	
+
 	/**
-	 * Este método devuelve el nombre de usuario.
-	 * @return Nombre de usuario. 
+	 * Este metodo devuelve el nombre de usuario.
+	 * 
+	 * @return Nombre de usuario.
 	 */
 
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	/**
 	 * Este metodo asigna el nombre de usuario.
-	 * @param nombre Nombre de usuario.
+	 * 
+	 * @param nombre
+	 *            Nombre de usuario.
 	 */
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 
 	}
-	
+
 	/**
-	 * Este método devuelve los apellidos del usuario.
+	 * Este metodo devuelve los apellidos del usuario.
+	 * 
 	 * @return Apellidos del usuario.
 	 */
-	
+
 	public String getApellidos() {
 		return apellidos;
 
 	}
-	
+
 	/**
 	 * Este metodo asigna los apellidos de usuario
-	 * @param apellidos Apellidos usuario
+	 * 
+	 * @param apellidos
+	 *            Apellidos usuario
 	 */
-	
+
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
 	/**
 	 * Este metodo devuelve el usuario.
+	 * 
 	 * @return Usuario
 	 */
-	
+
 	public String getUsuario() {
 		return usuario;
 	}
-	
+
 	/**
 	 * Este metodo asigna un usuario
-	 * @param usuario Usuario
+	 * 
+	 * @param usuario
+	 *            Usuario
 	 */
-	
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	/**
 	 * Este metodo devuelve el correo del usuario
+	 * 
 	 * @return Correo del usuario
 	 */
-	
+
 	public String getCorreo() {
 		return correo;
 	}
 
 	/**
 	 * Este metodo asigna el correo de un usario
-	 * @param correo Correo usuario
+	 * 
+	 * @param correo
+	 *            Correo usuario
 	 */
-	
+
 	public void setCorreo(String correo) {
 		this.correo = correo;
 
 	}
 }
-

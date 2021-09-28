@@ -3,56 +3,56 @@ package ejercicio1;
 import java.util.ArrayList;
 
 /**
- * Clase Critica Esta clase maneja la información necesario sobre la crítica de
- * un espectáculo.
+ * Clase Critica Esta clase maneja la informacion necesario sobre la critica de
+ * un espectaculo.
  * 
- * @author Noelia Hinojosa Sánchez
+ * @author Noelia Hinojosa Sanchez
  * @version 1.0, 24/09/2021
  */
 public class Critica {
 
 	/**
-	 * Título asociado a la crítica de un espectáculo.
+	 * Titulo asociado a la critica de un espectaculo.
 	 */
 	private String titulo;
 
 	/**
-	 * Puntuación del espectáculo. Los valores válidos son de 1 a 10, siendo el
-	 * 1 la puntuación menor. No puede ser NULL.
+	 * Puntuacion del espectaculo. Los valores validos son de 1 a 10, siendo el
+	 * 1 la puntuacon menor. No puede ser NULL.
 	 */
 	private int puntuacion;
 
 	/**
-	 * Comentario asociado a la crítica de un espectáculo.
+	 * Comentario asociado a la critica de un espectaculo.
 	 */
-	private String reseña;
+	private String resena;
 
 	/**
-	 * Valoraciones de la crítica. Lista con todas las valoraciones que ha
-	 * recibido la crítica. Los valores válidos son de 1 a 5, siendo el 1 la
-	 * valoración menor.
+	 * Valoraciones de la critica. Lista con todas las valoraciones que ha
+	 * recibido la critica. Los valores validos son de 1 a 5, siendo el 1 la
+	 * valoracion menor.
 	 */
 	private ArrayList<Valoraciones> valoraciones;
 
 	/**
-	 * Correo eléctronico del usuario que creo la crítica.
+	 * Correo electronico del usuario que creo la critica.
 	 */
 	private String correoPropietario;
 
 	/**
-	 * Este método devuelve el título de la crítica.
+	 * Este metodo devuelve el titulo de la critica.
 	 * 
-	 * @return El título de la crítica.
+	 * @return El titulo de la critica.
 	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
 	/**
-	 * Este método asigna el título de la crítica.
+	 * Este metodo asigna el titulo de la critica.
 	 * 
 	 * @param titulo
-	 *            Título de la crítica.
+	 *            Titulo de la critica.
 	 * @return Nada.
 	 */
 	public void setTitulo(String titulo) {
@@ -60,19 +60,19 @@ public class Critica {
 	}
 
 	/**
-	 * Este método devuelve la puntuación del espectáculo.
+	 * Este metodo devuelve la puntuacion del espectaculo.
 	 * 
-	 * @return La puntuación del espectáculo.
+	 * @return La puntuacion del espectaculo.
 	 */
 	public int getPuntuacion() {
 		return puntuacion;
 	}
 
 	/**
-	 * Este método asigna la puntuación del espectáculo.
+	 * Este metodo asigna la puntuacion del espectaculo.
 	 * 
 	 * @param puntuacion
-	 *            Puntuación del espectáculo.
+	 *            puntuacion del espectaculo.
 	 * @return Nada.
 	 */
 	public void setPuntuacion(int puntuacion) {
@@ -80,39 +80,39 @@ public class Critica {
 	}
 
 	/**
-	 * Este método devuelve el comentario del espectáculo.
+	 * Este metodo devuelve el comentario del espectaculo.
 	 * 
 	 * @return El comentario del epsectáculo.
 	 */
-	public String getReseña() {
-		return reseña;
+	public String getResena() {
+		return resena;
 	}
 
 	/**
-	 * Este método asigna el comentario del espectáculo.
+	 * Este metodo asigna el comentario del espectaculo.
 	 * 
 	 * @param reseña
-	 *            Comentario del espectáculo.
+	 *            Comentario del espectaculo.
 	 * @return Nada.
 	 */
-	public void setReseña(String reseña) {
-		this.reseña = reseña;
+	public void setResena(String resena) {
+		this.resena = resena;
 	}
 
 	/**
-	 * Este método devuelve todas las valoraciones de la crítica.
+	 * Este metodo devuelve todas las valoraciones de la critica.
 	 * 
-	 * @return Las valoraciones de la crítica.
+	 * @return Las valoraciones de la critica.
 	 */
 	public ArrayList<Valoraciones> getValoraciones() {
 		return valoraciones;
 	}
 
 	/**
-	 * Este método asigna las valoraciones a la crítica.
+	 * Este metodo asigna las valoraciones a la critica.
 	 * 
 	 * @param valoracion
-	 *            Valoraciones de la crítica.
+	 *            Valoraciones de la critica.
 	 * @return Nada.
 	 */
 	public void setValoraciones(ArrayList<Valoraciones> valoraciones) {
@@ -120,20 +120,20 @@ public class Critica {
 	}
 
 	/**
-	 * Este método devuelve el correo eléctronico del usuario que creo la
-	 * crítica.
+	 * Este metodo devuelve el correo eléctronico del usuario que creo la
+	 * critica.
 	 * 
-	 * @return Correo eléctronico del usuario que genero la crítica.
+	 * @return Correo electronico del usuario que genero la critica.
 	 */
 	public String getCorreoPropietario() {
 		return correoPropietario;
 	}
 
 	/**
-	 * Este método asigna el correo eléctronico del usuario que creo la crítica.
+	 * Este metodo asigna el correo electronico del usuario que creo la critica.
 	 * 
 	 * @param correoPropietario
-	 *            Correo eléctronico del usuario que creo la crítica.
+	 *            Correo electronico del usuario que creo la critica.
 	 * @return Nada.
 	 */
 	public void setCorreoPropietario(String correoPropietario) {
