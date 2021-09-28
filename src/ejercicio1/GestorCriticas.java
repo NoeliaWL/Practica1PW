@@ -1,5 +1,12 @@
 package ejercicio1;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -257,5 +264,163 @@ public class GestorCriticas {
 		}
 
 		return bandera;
+	}
+
+	/**
+	 * Este metodo guardar en un fichero de texto plano los datos de las
+	 * criticas y de los espectadores.
+	 * 
+	 * @param fileCriticas
+	 *            Ubicacion del archivo donde guardar las criticas.
+	 * @param fileEspectadores
+	 *            Ubicacion del archivo donde guardar los espectadores.
+	 * @return Nada.
+	 */
+	public void guardarFichero(String fileCriticas, String fileEspectadores) {
+		FileWriter fc = null, fe = null;
+		PrintWriter bufferc = null, buffere = null;
+
+		try {
+			fc = new FileWriter(fileCriticas);
+			fe = new FileWriter(fileEspectadores);
+			bufferc = new PrintWriter(fc);
+			buffere = new PrintWriter(fe);
+
+			for (Espectador e : espectadores) {
+				buffere.println(e.getNombre() + ";" + e.getApellidos() + ";" + e.getUsuario() + ";" + e.getCorreo());
+			}
+
+			ArrayList<Valoraciones> val = new ArrayList<Valoraciones>();
+			String valFichero = "";
+
+			for (Critica c : criticas) {
+				val = c.getValoraciones();
+				for (Valoraciones v : val) {
+					valFichero += v.getCorreo() + "/" + v.getValoracion() + ",";
+				}
+
+				bufferc.println(c.getCorreoPropietario() + ";" + c.getTitulo() + ";" + c.getPuntuacion() + ";"
+						+ c.getResena() + ";" + valFichero);
+				valFichero = "";
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fe != null)
+					fe.close();
+				if (fc != null)
+					fc.close();
+				if (buffere != null)
+					buffere.close();
+				if (bufferc != null)
+					bufferc.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Este metodo cargar desde un fichero de texto plano los datos de las
+	 * criticas y de los espectadores.
+	 * 
+	 * @param fileCriticas
+	 *            Ubicacion del archivo donde guardar las criticas.
+	 * @param fileEspectadores
+	 *            Ubicacion del archivo donde guardar los espectadores.
+	 * @return Nada.
+	 */
+	public void cargarFichero(String fileCriticas, String fileEspectadores) {
+		File fe = new File(fileEspectadores);
+		File fc = new File(fileCriticas);
+		FileReader fre = null, frc = null;
+		BufferedReader buffere = null, bufferc = null;
+		String lineaFichero;
+		String[] lineaCampos, lineaValoraciones, camposValoraciones;
+		ArrayList<Valoraciones> vals = new ArrayList<Valoraciones>();
+		Valoraciones val = new Valoraciones();
+		
+		try{
+			if(!fe.exists()){
+				System.out.println("El fichero espectadores.txt no existe");
+				fe.createNewFile();
+			}
+			else{
+				fre = new FileReader(fe);
+				buffere = new BufferedReader(fre);
+				
+				Espectador espectador;
+				
+				while((lineaFichero = buffere.readLine()) != null){
+					espectador = new Espectador();
+					
+					lineaCampos = lineaFichero.split(";");
+					
+					espectador.setNombre(lineaCampos[0]);
+					espectador.setApellidos(lineaCampos[1]);
+					espectador.setUsuario(lineaCampos[2]);
+					espectador.setCorreo(lineaCampos[3]);
+					
+					espectadores.add(espectador);
+				}
+			}
+			
+			if(!fc.exists()){
+				System.out.println("El fichero criticas.txt no existe");
+				fc.createNewFile();
+			}
+			else{
+				frc = new FileReader(fc);
+				bufferc = new BufferedReader(frc);
+				
+				Critica critica;
+				
+				while((lineaFichero = bufferc.readLine()) != null){
+					critica = new Critica();
+					
+					lineaCampos = lineaFichero.split(";");
+					
+					critica.setCorreoPropietario(lineaCampos[0]);
+					critica.setTitulo(lineaCampos[1]);
+					critica.setPuntuacion(Integer.parseInt(lineaCampos[2]));
+					critica.setResena(lineaCampos[3]);
+					
+					lineaValoraciones = lineaCampos[4].split(",");
+					for(int i=0; i<lineaValoraciones.length; i++){
+						camposValoraciones = lineaValoraciones[i].split("/");
+						val.setCorreo(camposValoraciones[0]);
+						val.setValoracion(Integer.parseInt(camposValoraciones[1]));
+						vals.add(val);
+					}
+					critica.setValoraciones(vals);
+					
+					criticas.add(critica);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(fre != null)
+					fre.close();
+				if(frc != null)
+					frc.close();
+				if (buffere != null)
+					buffere.close();
+				if (bufferc != null)
+					bufferc.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

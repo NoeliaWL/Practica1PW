@@ -43,8 +43,7 @@ public class Main {
 				lector = new BufferedReader(new FileReader(f));
 			}
 			prop.load(lector);
-			// cargarFichero Espectadores.txt
-			// cargarFichero Criticas.txt
+			gestorcriticas.cargarFichero(prop.getProperty("CRITICAS"), prop.getProperty("ESPECTADORES"));
 
 			do {
 				menu();
@@ -207,6 +206,8 @@ public class Main {
 					break;
 				}
 			} while ((numero >= 1) && (numero <= 9));
+			
+			gestorcriticas.guardarFichero(prop.getProperty("CRITICAS"), prop.getProperty("ESPECTADORES"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
