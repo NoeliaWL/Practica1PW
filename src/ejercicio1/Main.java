@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-
+		//Comentario para que me dejara subirlo de nuevo
 		GestorCriticas gestorcriticas = GestorCriticas.getInstance();
 
 		int numero = 0;

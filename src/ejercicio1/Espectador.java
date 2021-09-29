@@ -7,7 +7,7 @@ package ejercicio1;
  * @author rafael piqueras espinar
  * @version 1.0, 24/09/2021
  */
-
+//Comentario para que me dejara subirlo de nuevo
 public class Espectador {
 
 	private String nombre;

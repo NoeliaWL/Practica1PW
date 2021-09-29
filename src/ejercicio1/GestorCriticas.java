@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
  * @author Antonio Cabezas Jarabo
  * @version 1.0, 24/09/2021
  */
+
+//Comentario para que me dejara subirlo de nuevo
 public class GestorCriticas {
 
 	/**

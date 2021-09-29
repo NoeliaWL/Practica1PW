@@ -7,6 +7,7 @@ package ejercicio1;
  * @author Noelia Hinojosa Sanchez
  * @version 1.0, 27/09/2021
  */
+//Comentario para que me dejara subirlo de nuevo
 public class Valoraciones {
 	/**
 	 * Correo electronico del usuario que valora una critica.
