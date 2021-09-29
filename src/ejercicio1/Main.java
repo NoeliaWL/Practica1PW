@@ -1,12 +1,12 @@
 package ejercicio1;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -38,7 +38,10 @@ public class Main {
 			if (f.exists()) {
 				lector = new BufferedReader(new FileReader(f));
 			} else {
-				BufferedWriter escritor = new BufferedWriter(new FileWriter(f));
+				System.out.println("El fichero fichero.properties no existe, se va a crear.");
+				PrintWriter escritor = new PrintWriter(new FileWriter(f));
+				escritor.println("CRITICAS: ./criticas.txt");
+				escritor.println("ESPECTADORES: ./espectadores.txt");
 				escritor.close();
 				lector = new BufferedReader(new FileReader(f));
 			}
@@ -222,7 +225,7 @@ public class Main {
 	}
 
 	public static void menu() {
-		System.out.println("Elija una opcion:");
+		System.out.println("\nElija una opcion:");
 		System.out.println("1. Dar de alta a un usuario");
 		System.out.println("2. Dar de baja a un usuario");
 		System.out.println("3. Actualizar los datos del usuario");

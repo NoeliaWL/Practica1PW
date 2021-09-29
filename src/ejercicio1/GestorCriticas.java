@@ -349,7 +349,7 @@ public class GestorCriticas {
 		
 		try{
 			if(!fe.exists()){
-				System.out.println("El fichero espectadores.txt no existe");
+				System.out.println("El fichero espectadores.txt no existe, se va a crear.");
 				fe.createNewFile();
 			}
 			else{
@@ -373,7 +373,7 @@ public class GestorCriticas {
 			}
 			
 			if(!fc.exists()){
-				System.out.println("El fichero criticas.txt no existe");
+				System.out.println("El fichero criticas.txt no existe, se va a crear.");
 				fc.createNewFile();
 			}
 			else{
