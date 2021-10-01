@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -25,9 +26,11 @@ public class Main {
 		int numero = 0;
 		Scanner reader = new Scanner(System.in);
 		String nombre, apellidos, nick, correo, titulo, resena;
-		int puntuacion;
+		String buffer;
+		int puntuacion, media = 0;
 		int index;
 		Espectador user;
+		ArrayList<Critica> listacriticas = new ArrayList<Critica>();
 
 		Properties prop = new Properties();
 		String filename = "./fichero.properties";
@@ -50,7 +53,7 @@ public class Main {
 
 			do {
 				menu();
-				numero = reader.nextInt();
+				numero = Integer.parseInt(reader.nextLine());
 				switch (numero) {
 				case 1:
 					System.out.println("Introduzca su nombre: ");
@@ -63,7 +66,7 @@ public class Main {
 					correo = reader.nextLine();
 
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
-						if (gestorcriticas.correoRegistrado(correo)) {
+						if (!gestorcriticas.correoRegistrado(correo)) {
 							gestorcriticas.altaUsuario(nombre, apellidos, nick, correo);
 						} else {
 							System.out.println("Correo electronico ya registrado");
@@ -152,7 +155,8 @@ public class Main {
 					break;
 
 				case 6:
-					gestorcriticas.getCriticas();
+					buffer = gestorcriticas.getCriticas();
+					System.out.println(buffer);
 					break;
 
 				case 7:
@@ -161,20 +165,26 @@ public class Main {
 					
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
-							gestorcriticas.getCriticasUsuario(correo);
+							buffer = gestorcriticas.getCriticasUsuario(correo);
+							if(buffer == null){
+								System.out.println("No tiene criticas creadas.");
+							}
+							else{
+								System.out.println(buffer);
+								System.out.println("\nIntroduce el indice de la critica a borrar: ");
+								index = Integer.parseInt(reader.nextLine());
+								gestorcriticas.borraCritica(index);
+							}
 						} else {
 							System.out.println("Correo electronico no registrado");
 						}
 					} else {
 						System.out.println("Formato de correo no valido");
 					}
-					
-					System.out.println("\nIntroduce el indice de la critica a borrar: ");
-					index = Integer.parseInt(reader.nextLine());
-					gestorcriticas.borraCritica(index);
 					break;
 
 				case 8:
+					gestorcriticas.getCriticas();
 					System.out.println("Introduzca el indice de la critica que desea votar: ");
 					index = Integer.parseInt(reader.nextLine());
 					System.out.println("Introduzca la puntuacion de su votacion: ");
@@ -199,13 +209,31 @@ public class Main {
 
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
-							gestorcriticas.buscaCritica(correo);
+							listacriticas = gestorcriticas.buscaCritica(correo);
 						} else {
 							System.out.println("Usuario no registrado");
 						}
 					} else {
 						System.out.println("Formato de usuario no valido");
 					}
+					
+					for(Critica c : listacriticas){
+						System.out.print(listacriticas.indexOf(c) + " ");
+						System.out.print("Titulo: " + c.getTitulo() + " ");
+						System.out.println("Puntuacion: " + c.getPuntuacion());
+						System.out.println("Resena: " + c.getResena());
+						if(c.getValoraciones().size() != 0){
+							for (Valoraciones v : c.getValoraciones()) {
+								media += v.getValoracion();
+							}
+							media /= c.getValoraciones().size();
+							System.out.println("Media de las valoraciones: " + media);
+						}
+						else{
+							System.out.println("No tiene valoraciones actualmente.");
+						}
+					}
+					
 					break;
 				}
 			} while ((numero >= 1) && (numero <= 9));

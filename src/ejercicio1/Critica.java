@@ -48,6 +48,10 @@ public class Critica {
 	public String getTitulo() {
 		return titulo;
 	}
+	
+	public Critica(){
+		valoraciones = new ArrayList<Valoraciones>();
+	}
 
 	/**
 	 * Este metodo asigna el titulo de la critica.
