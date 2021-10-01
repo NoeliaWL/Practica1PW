@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1.data;
 
 /**
  * Clase espectador Esta clase tiene los metodos necesarios para gestionar todos
@@ -7,7 +7,6 @@ package ejercicio1;
  * @author rafael piqueras espinar
  * @version 1.0, 24/09/2021
  */
-//Comentario para que me dejara subirlo de nuevo
 public class Espectador {
 
 	private String nombre;

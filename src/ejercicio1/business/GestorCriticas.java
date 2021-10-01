@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1.business;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ejercicio1.data.Critica;
+import ejercicio1.data.Espectador;
+import ejercicio1.data.Valoraciones;
+
 /**
  * Clase GestorCriticas Esta clase tiene los metodos necesarios para gestionar
  * las criticas y los usuarios.
@@ -18,8 +22,6 @@ import java.util.regex.Pattern;
  * @author Antonio Cabezas Jarabo
  * @version 1.0, 24/09/2021
  */
-
-//Comentario para que me dejara subirlo de nuevo
 public class GestorCriticas {
 
 	/**
@@ -91,6 +93,14 @@ public class GestorCriticas {
 		}
 	}
 
+	/**
+	 * Este metodo devuelve los datos de un usuario concreto.
+	 * 
+	 * @param correo
+	 *            Correo electronico del usuario.
+	 * @return Datos del espectador encontrado.
+	 * @author Antonio Cabezas Jarabo
+	 */
 	public Espectador getUsuario(String correo) {
 		Espectador usuario = new Espectador();
 		for (Espectador e : espectadores) {
@@ -101,12 +111,46 @@ public class GestorCriticas {
 		return usuario;
 	}
 
+	public String consultarDatosUsuarios() {
+		StringBuffer buffer = new StringBuffer();
+
+		for (Espectador e : espectadores) {
+			buffer.append(e.getCorreo() + "\n");
+			buffer.append(e.getNombre() + "\n");
+			buffer.append(e.getApellidos() + "\n");
+			buffer.append(e.getUsuario() + "\n");
+			buffer.append("\n");
+		}
+
+		return buffer.toString();
+	}
+
+	/**
+	 * Este metodo actualiza los datos de un usuario.
+	 * 
+	 * @param nombre
+	 *            Nombre modificado del usuario.
+	 * @param apellidos
+	 *            Apellidos modificados del usuario.
+	 * @param nick
+	 *            Nickname modificado del usuario.
+	 * @param correo
+	 *            Correo electronico del usuario que se va a modificar.
+	 * @return Nada.
+	 * @author Antonio Cabezas Jarabo
+	 */
 	public void actualizarDatosUsuario(String nombre, String apellidos, String nick, String correo) {
 		for (Espectador e : espectadores) {
 			if (e.getCorreo().equals(correo)) {
-				e.setNombre(nombre);
-				e.setApellidos(apellidos);
-				e.setUsuario(nick);
+				if (nombre != "") {
+					e.setNombre(nombre);
+				}
+				if (apellidos != "") {
+					e.setApellidos(apellidos);
+				}
+				if (nick != "") {
+					e.setUsuario(nick);
+				}
 			}
 		}
 	}
@@ -145,18 +189,17 @@ public class GestorCriticas {
 		StringBuffer buffer = new StringBuffer();
 		int media = 0;
 		for (Critica c : criticas) {
-			buffer.append(criticas.indexOf(c) + " ");
+			buffer.append("Indice: " + criticas.indexOf(c) + "\n");
 			buffer.append("Titulo: " + c.getTitulo() + " ");
 			buffer.append("Puntuacion: " + c.getPuntuacion());
 			buffer.append("\nResena: " + c.getResena());
-			if(c.getValoraciones().size() != 0){
+			if (c.getValoraciones().size() != 0) {
 				for (Valoraciones v : c.getValoraciones()) {
 					media += v.getValoracion();
 				}
 				media /= c.getValoraciones().size();
 				buffer.append("\nMedia de las valoraciones: " + media);
-			}
-			else{
+			} else {
 				buffer.append("\nNo tiene valoraciones actualmente.");
 			}
 			buffer.append("\n\n");
@@ -176,24 +219,23 @@ public class GestorCriticas {
 		int media = 0;
 		for (Critica c : criticas) {
 			if (c.getCorreoPropietario().equals(correo)) {
-				buffer.append(criticas.indexOf(c) + " ");
+				buffer.append("Indice: " + criticas.indexOf(c) + "\n");
 				buffer.append("Titulo: " + c.getTitulo() + " ");
 				buffer.append("Puntuacion: " + c.getPuntuacion());
 				buffer.append("\nResena: " + c.getResena());
-				if(c.getValoraciones().size() != 0){
+				if (c.getValoraciones().size() != 0) {
 					for (Valoraciones v : c.getValoraciones()) {
 						media += v.getValoracion();
 					}
 					media /= c.getValoraciones().size();
 					buffer.append("\nMedia de las valoraciones: " + media);
-				}
-				else{
+				} else {
 					buffer.append("\nNo tiene valoraciones actualmente.");
 				}
 				buffer.append("\n");
 			}
 		}
-		
+
 		return buffer.toString();
 	}
 
@@ -219,10 +261,11 @@ public class GestorCriticas {
 	 *            Puntua una critica.
 	 * @author Rafael Piqueras Espinar
 	 */
-
 	public void votaCritica(int index, String correo, int puntuacion) {
 		if (criticas.get(index).getCorreoPropietario().equals(correo)) {
 			System.out.println("No puede votar su propia critica");
+		} else if (comprobarValoraciones(index, correo)) {
+			System.out.println("No se puede votar dos veces la misma critica.");
 		} else {
 			ArrayList<Valoraciones> valoraciones = criticas.get(index).getValoraciones();
 			Valoraciones valoracion = new Valoraciones();
@@ -252,6 +295,28 @@ public class GestorCriticas {
 	}
 
 	/**
+	 * Este metodo comprueba que no se valora la misma critica dos veces.
+	 * 
+	 * @param index
+	 *            Indice de la critica a valorar.
+	 * @param correo
+	 *            Correo del usuario que vota.
+	 * @return True si ya se valoro por ese usuario anteriormente la critica.
+	 * @author Noelia Hinojosa Sanchez
+	 */
+	public Boolean comprobarValoraciones(int index, String correo) {
+		Boolean bandera = false;
+
+		for (Valoraciones v : criticas.get(index).getValoraciones()) {
+			if (v.getCorreo().equals(correo)) {
+				bandera = true;
+			}
+		}
+
+		return bandera;
+	}
+
+	/**
 	 * Este metodo comprueba que el correo electronico pasado tenga un formato
 	 * valido.
 	 * 
@@ -278,13 +343,13 @@ public class GestorCriticas {
 	 */
 	public Boolean correoRegistrado(String correo) {
 		Boolean bandera = false;
-		
-		for(Espectador e : espectadores){
-			if(e.getCorreo().equals(correo)){
+
+		for (Espectador e : espectadores) {
+			if (e.getCorreo().equals(correo)) {
 				bandera = true;
 			}
 		}
-		
+
 		return bandera;
 	}
 
@@ -366,61 +431,59 @@ public class GestorCriticas {
 		String[] lineaCampos, lineaValoraciones, camposValoraciones;
 		ArrayList<Valoraciones> vals = new ArrayList<Valoraciones>();
 		Valoraciones val = new Valoraciones();
-		
-		try{
-			if(!fe.exists()){
+
+		try {
+			if (!fe.exists()) {
 				System.out.println("El fichero espectadores.txt no existe, se va a crear.");
 				fe.createNewFile();
-			}
-			else{
+			} else {
 				fre = new FileReader(fe);
 				buffere = new BufferedReader(fre);
-				
+
 				Espectador espectador;
-				
-				while((lineaFichero = buffere.readLine()) != null){
+
+				while ((lineaFichero = buffere.readLine()) != null) {
 					espectador = new Espectador();
-					
+
 					lineaCampos = lineaFichero.split(";");
-					
+
 					espectador.setNombre(lineaCampos[0]);
 					espectador.setApellidos(lineaCampos[1]);
 					espectador.setUsuario(lineaCampos[2]);
 					espectador.setCorreo(lineaCampos[3]);
-					
+
 					espectadores.add(espectador);
 				}
 			}
-			
-			if(!fc.exists()){
+
+			if (!fc.exists()) {
 				System.out.println("El fichero criticas.txt no existe, se va a crear.");
 				fc.createNewFile();
-			}
-			else{
+			} else {
 				frc = new FileReader(fc);
 				bufferc = new BufferedReader(frc);
-				
+
 				Critica critica;
-				
-				while((lineaFichero = bufferc.readLine()) != null){
+
+				while ((lineaFichero = bufferc.readLine()) != null) {
 					critica = new Critica();
-					
+
 					lineaCampos = lineaFichero.split(";");
-					
+
 					critica.setCorreoPropietario(lineaCampos[0]);
 					critica.setTitulo(lineaCampos[1]);
 					critica.setPuntuacion(Integer.parseInt(lineaCampos[2]));
 					critica.setResena(lineaCampos[3]);
-					
+
 					lineaValoraciones = lineaCampos[4].split(",");
-					for(int i=0; i<lineaValoraciones.length; i++){
+					for (int i = 0; i < lineaValoraciones.length; i++) {
 						camposValoraciones = lineaValoraciones[i].split("/");
 						val.setCorreo(camposValoraciones[0]);
 						val.setValoracion(Integer.parseInt(camposValoraciones[1]));
 						vals.add(val);
 					}
 					critica.setValoraciones(vals);
-					
+
 					criticas.add(critica);
 				}
 			}
@@ -432,9 +495,9 @@ public class GestorCriticas {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(fre != null)
+				if (fre != null)
 					fre.close();
-				if(frc != null)
+				if (frc != null)
 					frc.close();
 				if (buffere != null)
 					buffere.close();
