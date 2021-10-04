@@ -7,6 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ejercicio2.business.Gestorcriticas;
+
+import java.time.LocalDateTime;
+import ejercicio2.data.Critica;
+
 import ejercicio2.data.Categoriaevento;
 import ejercicio2.data.Espectaculo;
 
@@ -56,7 +61,7 @@ public class Gestorespectaculos {
 	 * @author Rafael
 	 */
 	public void Cancelarespectaculosesion() {
-
+		
 	}
 	
 	public void cargarFichero(String fileEspectaculos){
@@ -69,12 +74,12 @@ public class Gestorespectaculos {
 				System.out.println("El fichero espectaculos.txt");
 			}
 		}
-		catch(FileNotFoundException e){
+		/*catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
+		//catch(IOException e){
+			//e.printStackTrace();
+		}*/
 		catch(Exception e){
 			e.printStackTrace();
 		}
@@ -90,5 +95,42 @@ public class Gestorespectaculos {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void Actualizardatosespectaculo(String titulo, String descripcion, LocalDateTime fechaHora ) {
+		
+		
+	}
+	
+	public String Buscarespectaculo(String titulo) {
+		StringBuffer buffer= new StringBuffer();
+		  for(Espectaculo e: espectaculos) {
+			  if(e.getTitulo().equals(titulo)) {
+			  buffer.append("Titulo:" + e.getTitulo());
+			  buffer.append("Descripcion:" + e.getDescripcion());
+			  buffer.append("Categoria:" + e.getCategoria());
+			  }
+		  }
+		  return buffer.toString();
+	}
+
+
+
+	public String Buscarespectaculo(Categoriaevento espectaculo) {
+		StringBuffer buffer = new StringBuffer();
+		for(Espectaculo e: espectaculos) {
+			if(e.getCategoria().equals(espectaculo)) {
+				buffer.append("Titulo:" + e.getTitulo());
+				buffer.append("Descripcion:" + e.getDescripcion());
+				buffer.append("Categoria:" + e.getCategoria());
+			}
+		}
+		return buffer.toString();
+	}
+
+
+	public String Consultarcriticas(String titulo) {
+		Gestorcriticas criticas = Gestorcriticas.getInstance();
+		return criticas.getCriticasTitulo(titulo);
 	}
 }

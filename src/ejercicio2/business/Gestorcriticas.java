@@ -242,6 +242,31 @@ public class Gestorcriticas {
 
 		return buffer.toString();
 	}
+	
+	public String getCriticasTitulo(String titulo) {
+		StringBuffer buffer = new StringBuffer();
+		int media = 0;
+		for (Critica c : criticas) {
+			if (c.getTituloEspectaculo().equals(titulo)) {
+				buffer.append("Indice: " + criticas.indexOf(c) + "\n");
+				buffer.append("Titulo: " + c.getTitulo() + " ");
+				buffer.append("Puntuacion: " + c.getPuntuacion());
+				buffer.append("\nResena: " + c.getResena());
+				if (c.getValoraciones().size() != 0) {
+					for (Valoraciones v : c.getValoraciones()) {
+						media += v.getValoracion();
+					}
+					media /= c.getValoraciones().size();
+					buffer.append("\nMedia de las valoraciones: " + media);
+				} else {
+					buffer.append("\nNo tiene valoraciones actualmente.");
+				}
+				buffer.append("\n");
+			}
+		}
+
+		return buffer.toString();
+	}
 
 	/**
 	 * Este metodo borra una critica .

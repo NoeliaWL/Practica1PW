@@ -67,7 +67,7 @@ public class Espectaculo {
 	 * @return
 	 */
 
-	public Categoriaevento categoria() {
+	public Categoriaevento getCategoria() {
 		return categoria;
 	}
 
