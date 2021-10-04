@@ -13,6 +13,7 @@ public class Espectador {
 	private String apellidos;
 	private String usuario;
 	private String correo;
+	private String contrasena;
 	private TipoUsuario tipo;
 
 	/**
@@ -120,5 +121,13 @@ public class Espectador {
 	 */
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
+	}
+	
+	public String getContrasena() {
+		return contrasena;
+	}
+	
+	public void setContraseña(String contrasena) {
+		this.contrasena = contrasena;
 	}
 }

@@ -22,8 +22,8 @@ public class Espectaculopuntual extends Espectaculo {
 		return hora;
 	}
 	
-	public void setHora(LocalTime fecha) {
-		this.hora = fecha;
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
 		
 	}
 	

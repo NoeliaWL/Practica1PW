@@ -512,4 +512,18 @@ public class Gestorcriticas {
 			}
 		}
 	}
+	public TipoUsuario Loginusuario(String correo, String contrasena) {
+		TipoUsuario usuario = TipoUsuario.ESPECTADOR;
+		for(Espectador e: espectadores) {
+			if(e.getCorreo().equals(correo)) {
+			 if(e.getContrasena().equals(contrasena)) {
+				 usuario = e.getTipo();
+				 
+			 }
+		  }
+		
+		}
+		return usuario;
+	}
 }
+
