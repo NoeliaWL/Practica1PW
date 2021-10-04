@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ejercicio1.data.Critica;
-import ejercicio1.data.Espectador;
-import ejercicio1.data.Valoraciones;
+import ejercicio2.data.Critica;
+import ejercicio2.data.Espectador;
+import ejercicio2.data.Valoraciones;
+import ejercicio2.data.TipoUsuario;
 
 /**
  * Clase GestorCriticas Esta clase tiene los metodos necesarios para gestionar
@@ -68,12 +69,15 @@ public class Gestorcriticas {
 	 * @return Nada.
 	 * @author Noelia Hinojosa Sanchez
 	 */
-	public void altaUsuario(String nombre, String apellidos, String nick, String correo) {
+	public void altaUsuario(String nombre, String apellidos, String nick, String correo, TipoUsuario tipo) {
 		Espectador usuario = new Espectador();
+		
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
 		usuario.setUsuario(nick);
 		usuario.setCorreo(correo);
+		usuario.setTipo(tipo);
+		
 		espectadores.add(usuario);
 	}
 
