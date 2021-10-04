@@ -1,4 +1,4 @@
-package ejercicio1.business;
+package ejercicio2.business;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,12 +22,12 @@ import ejercicio1.data.Valoraciones;
  * @author Antonio Cabezas Jarabo
  * @version 1.0, 24/09/2021
  */
-public class GestorCriticas {
+public class Gestorcriticas {
 
 	/**
 	 * Instancia unica del gestor de criticas.
 	 */
-	private static GestorCriticas instance = null;
+	private static Gestorcriticas instance = null;
 
 	private ArrayList<Espectador> espectadores;
 	private ArrayList<Critica> criticas;
@@ -36,7 +36,7 @@ public class GestorCriticas {
 	 * Constructor del gestor de criticas. Es privado para que solo haya un
 	 * unico gestor.
 	 */
-	private GestorCriticas() {
+	private Gestorcriticas() {
 		espectadores = new ArrayList<Espectador>();
 		criticas = new ArrayList<Critica>();
 	}
@@ -47,9 +47,9 @@ public class GestorCriticas {
 	 * @return El gestor de criticas.
 	 * @author Noelia Hinojosa Sanchez
 	 */
-	public static GestorCriticas getInstance() {
+	public static Gestorcriticas getInstance() {
 		if (instance == null) {
-			instance = new GestorCriticas();
+			instance = new Gestorcriticas();
 		}
 		return instance;
 	}

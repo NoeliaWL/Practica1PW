@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
-import ejercicio1.business.GestorCriticas;
+import ejercicio1.business.Gestorcriticas;
 import ejercicio1.data.Critica;
 import ejercicio1.data.Espectador;
 import ejercicio1.data.Valoraciones;
@@ -26,7 +26,7 @@ import ejercicio1.data.Valoraciones;
 
 public class Main {
 	public static void main(String[] args) {
-		GestorCriticas gestorcriticas = GestorCriticas.getInstance();
+		Gestorcriticas gestorcriticas = Gestorcriticas.getInstance();
 
 		int numero = 0, opcion = 0;
 		Scanner reader = new Scanner(System.in);
