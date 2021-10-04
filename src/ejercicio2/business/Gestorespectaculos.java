@@ -1,5 +1,10 @@
 package ejercicio2.business;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ejercicio2.data.Categoriaevento;
@@ -55,6 +60,35 @@ public class Gestorespectaculos {
 	}
 	
 	public void cargarFichero(String fileEspectaculos){
+		File f = new File(fileEspectaculos);
+		FileReader fr = null;
+		BufferedReader buffer = null;
 		
+		try{
+			if(!f.exists()){
+				System.out.println("El fichero espectaculos.txt");
+			}
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(fr != null)
+					fr.close();
+				if(buffer != null){
+					buffer.close();
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 }
