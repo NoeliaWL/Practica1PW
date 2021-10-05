@@ -69,15 +69,17 @@ public class Gestorcriticas {
 	 * @return Nada.
 	 * @author Noelia Hinojosa Sanchez
 	 */
-	public void altaUsuario(String nombre, String apellidos, String nick, String correo, TipoUsuario tipo) {
+	public void altaUsuario(String nombre, String apellidos, String nick, String correo, String contrasena,
+			TipoUsuario tipo) {
 		Espectador usuario = new Espectador();
-		
+
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
 		usuario.setUsuario(nick);
 		usuario.setCorreo(correo);
+		usuario.setContrasena(contrasena);
 		usuario.setTipo(tipo);
-		
+
 		espectadores.add(usuario);
 	}
 
@@ -242,7 +244,7 @@ public class Gestorcriticas {
 
 		return buffer.toString();
 	}
-	
+
 	public String getCriticasTitulo(String titulo) {
 		StringBuffer buffer = new StringBuffer();
 		int media = 0;
@@ -537,18 +539,29 @@ public class Gestorcriticas {
 			}
 		}
 	}
+
 	public TipoUsuario Loginusuario(String correo, String contrasena) {
-		TipoUsuario usuario = TipoUsuario.ESPECTADOR;
-		for(Espectador e: espectadores) {
-			if(e.getCorreo().equals(correo)) {
-			 if(e.getContrasena().equals(contrasena)) {
-				 usuario = e.getTipo();
-				 
-			 }
-		  }
-		
+		TipoUsuario usuario = TipoUsuario.DEFAULT;
+		for (Espectador e : espectadores) {
+			if (e.getCorreo().equals(correo)) {
+				if (e.getContrasena().equals(contrasena)) {
+					usuario = e.getTipo();
+				}
+			}
+
 		}
 		return usuario;
 	}
+	
+	public Boolean comprobarPropietario(String correo){
+		Boolean bandera = false;
+		
+		for(Critica c : criticas){
+			if(c.getCorreoPropietario().equals(correo)){
+				bandera = true;
+			}
+		}
+		
+		return bandera;
+	}
 }
-
