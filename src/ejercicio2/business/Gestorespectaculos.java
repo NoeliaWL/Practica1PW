@@ -130,13 +130,53 @@ public class Gestorespectaculos {
 	 * @param fechaHora
 	 * @author Rafa
 	 */
-	public void Actualizardatosespectaculo(String titulo, String descripcion, LocalDateTime fechaHora ) {
-		
+	public void Actualizardatosespectaculospuntual(String titulo, String descripcion,Sesiones sesion, ArrayList<Sesiones> multiple) {
+			Espectaculo datos = new Espectaculo();
+				for(Espectaculo e: espectaculos) {
+					if(e.getTitulo().equals(titulo) && e instanceof Espectaculopuntual) {
+						e.setDescripcion(descripcion);
+						((Espectaculopuntual) e).setRepresentacion(sesion);
+						datos = e;
+						espectaculos.add(datos);
+				}
+		}
 		
 	}
 	
-	public void ContabilizarVentaEntradas(){
+	public void Actualizardatosespectaculomultiple(String titulo, String descripcion, ArrayList<Sesiones> multiple) {
+			Espectaculo datos = new Espectaculo();
+				for(Espectaculo e: espectaculos) {
+					if(e.getTitulo().equals(titulo) && e instanceof Espectaculopasemultiple) {
+						e.setDescripcion(descripcion);
+						((Espectaculopasemultiple) e).setRepresentaciones(multiple);
+						datos = e;
+						espectaculos.add(datos);
+			}
+	   }
+	}
+	
+	public void Actualizardatospasetemporada(String titulo, String descripcion, ArrayList<Sesiones> temporada) {
+			Espectaculo datos = new Espectaculo();
+			for(Espectaculo e: espectaculos) {
+				if(e.getTitulo().equals(titulo) && e instanceof Espectaculotemporada) {
+						e.setDescripcion(descripcion);
+						((Espectaculotemporada) e).SetTemporada(temporada);
+						datos = e;
+						espectaculos.add(datos);
+				}
+		   }
+	}
+	
+	
+	public int  ContabilizarVentaEntradas(int numeroEntradas){
 		//Contabilizar la venta de entradas de 1 sesion
+		int contadorEntradas = 0;
+		Espectaculo espectaculo = new Espectaculo();
+		if(numeroEntradas<espectaculo.getEntradas()) {
+			contadorEntradas = contadorEntradas + numeroEntradas;
+			
+		}
+		return contadorEntradas-espectaculo.getEntradas();
 	}
 	
 	public void ConsultarLocalidadesDisponibles(/*Date fechaRepresentacion*/){
@@ -156,6 +196,7 @@ public class Gestorespectaculos {
 			  buffer.append("Titulo:" + e.getTitulo());
 			  buffer.append("Descripcion:" + e.getDescripcion());
 			  buffer.append("Categoria:" + e.getCategoria());
+			  buffer.append("Numero entradas disponibles:" + e.getEntradas());
 			  }
 		  }
 		  return buffer.toString();
@@ -174,6 +215,7 @@ public class Gestorespectaculos {
 				buffer.append("Titulo:" + e.getTitulo());
 				buffer.append("Descripcion:" + e.getDescripcion());
 				buffer.append("Categoria:" + e.getCategoria());
+				buffer.append("Numero entradas disponibles:" + e.getEntradas());
 			}
 		}
 		return buffer.toString();
