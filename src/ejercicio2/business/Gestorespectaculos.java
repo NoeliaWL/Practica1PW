@@ -8,13 +8,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import ejercicio2.data.Sesiones;
 
 import ejercicio2.business.Gestorcriticas;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import ejercicio2.data.Categoriaevento;
 import ejercicio2.data.Espectaculo;
+import ejercicio2.data.Espectaculopasemultiple;
+import ejercicio2.data.Espectaculopuntual;
+import ejercicio2.data.Espectaculotemporada;
 
 public class Gestorespectaculos {
 	private static Gestorespectaculos instance = null;
@@ -39,13 +45,33 @@ public class Gestorespectaculos {
 	 * @param categoria
 	 * @author Rafael
 	 */
-	public void Altaespectaculo(String titulo, String descripcion, Categoriaevento categoria) {
-		Espectaculo espectaculo1 = new Espectaculo();
-		espectaculo1.setTitulo(titulo);
-		espectaculo1.setDescripcion(descripcion);
-		espectaculo1.setCategoriaevento(categoria);
-		espectaculos.add(espectaculo1);
+	public void Altaespectaculopasepuntual(String titulo, String descripcion, Categoriaevento categoria, Sesiones sesion) {
+		Espectaculopuntual puntual = new Espectaculopuntual();
+		puntual.setRepresentacion(sesion);
+		puntual.setTitulo(titulo);
+		puntual.setDescripcion(descripcion);
+		puntual.setCategoriaevento(categoria);
+		espectaculos.add(puntual);
+	
 	}
+	
+	public void Altaespectaculotemporada(String titulo, String descripcion, Categoriaevento categoria, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
+		Espectaculotemporada temporada = new Espectaculotemporada();
+		temporada.setTitulo(titulo);
+		temporada.setDescripcion(descripcion);
+		temporada.setCategoriaevento(categoria);
+		temporada.Calcularfecha(fechaInicio, fechaFin, hora);
+		espectaculos.add(temporada);
+		}
+	
+	public void Altaespectaculopasemultiple(String titulo, String descripcion, Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
+		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
+		multiple.setTitulo(titulo);
+		multiple.setDescripcion(descripcion);
+		multiple.setCategoriaevento(categoria);
+		multiple.setRepresentaciones(pasemultiple);
+		espectaculos.add(multiple);
+		}
 	
 	/**
 	 * 
@@ -183,7 +209,7 @@ public class Gestorespectaculos {
 				buffer = new BufferedReader(fr);
 				
 				while((lineaFichero = buffer.readLine()) != null){
-					//¿Como se van a guardar los datos?
+					//ï¿½Como se van a guardar los datos?
 				}
 			}
 		}
@@ -224,7 +250,7 @@ public class Gestorespectaculos {
 			buffer = new PrintWriter(f);
 			
 			for(Espectaculo e : espectaculos){
-				//Guardar informacion ¿Como se van a guardar los datos?
+				//Guardar informacion ï¿½Como se van a guardar los datos?
 			}
 		}
 		catch(FileNotFoundException e){
