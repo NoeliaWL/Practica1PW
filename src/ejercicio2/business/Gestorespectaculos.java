@@ -21,6 +21,7 @@ import ejercicio2.data.Espectaculo;
 import ejercicio2.data.Espectaculopasemultiple;
 import ejercicio2.data.Espectaculopuntual;
 import ejercicio2.data.Espectaculotemporada;
+import ejercicio2.data.Factoriaconcreta;
 
 public class Gestorespectaculos {
 	private static Gestorespectaculos instance = null;
@@ -46,30 +47,25 @@ public class Gestorespectaculos {
 	 * @author Rafael
 	 */
 	public void Altaespectaculopasepuntual(String titulo, String descripcion, Categoriaevento categoria, Sesiones sesion) {
+		Factoriaconcreta factoria = new Factoriaconcreta();
 		Espectaculopuntual puntual = new Espectaculopuntual();
-		puntual.setRepresentacion(sesion);
-		puntual.setTitulo(titulo);
-		puntual.setDescripcion(descripcion);
-		puntual.setCategoriaevento(categoria);
+		puntual = factoria.createEspectaculoPuntual(titulo, descripcion, categoria, sesion);
 		espectaculos.add(puntual);
-	
-	}
+		
+		}
 	
 	public void Altaespectaculotemporada(String titulo, String descripcion, Categoriaevento categoria, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
+		Factoriaconcreta factoria = new Factoriaconcreta();
 		Espectaculotemporada temporada = new Espectaculotemporada();
-		temporada.setTitulo(titulo);
-		temporada.setDescripcion(descripcion);
-		temporada.setCategoriaevento(categoria);
-		temporada.Calcularfecha(fechaInicio, fechaFin, hora);
+		temporada = factoria.createEspectaculoTemporada(titulo, descripcion, categoria, fechaInicio, fechaFin, hora);
 		espectaculos.add(temporada);
+		
 		}
 	
 	public void Altaespectaculopasemultiple(String titulo, String descripcion, Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
+		Factoriaconcreta factoria = new Factoriaconcreta();
 		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
-		multiple.setTitulo(titulo);
-		multiple.setDescripcion(descripcion);
-		multiple.setCategoriaevento(categoria);
-		multiple.setRepresentaciones(pasemultiple);
+		multiple = factoria.createEspectaculoPaseMultiple(titulo, descripcion, categoria, pasemultiple);
 		espectaculos.add(multiple);
 		}
 	
@@ -87,14 +83,50 @@ public class Gestorespectaculos {
 	/**
 	 * @author Rafael
 	 */
-	public void Cancelarespectaculosesion(String titulo/*, sesion*/) {
+	public void Mostrarsesiones() {
+		StringBuffer buffer = new StringBuffer();
+		for(Espectaculo e: espectaculos) {
+			if(e instanceof Espectaculopuntual) {
+				Espectaculopuntual puntual =  new Espectaculopuntual();
+				puntual = (Espectaculopuntual)e;
+				buffer.append(puntual.getTitulo()+ "\n");
+				buffer.append(puntual.getRepresentacion().getFechaRepresentacion()+ " ");
+				buffer.append(puntual.getRepresentacion().getHora()+"\n");
+				
+			}else if (e instanceof Espectaculopasemultiple) {
+				Espectaculopasemultiple multiple = new Espectaculopasemultiple();
+				multiple = (Espectaculopasemultiple)e;
+				buffer.append(multiple.getTitulo()+"\n");
+				for(Sesiones s: multiple.getPasemultiple()) {
+					buffer.append(s.getFechaRepresentacion()+" ");
+					buffer.append(s.getHora()+"\n");
+					
+					
+				}
+			}else if (e instanceof Espectaculotemporada) {
+				Espectaculotemporada temporada = new Espectaculotemporada();
+				temporada = (Espectaculotemporada)e;
+				buffer.append(temporada.getTitulo()+"\n");
+				for(Sesiones s: temporada.getTemporada()) {
+					buffer.append(s.getFechaRepresentacion()+" ");
+					buffer.append(s.getHora()+"\n");
+					
+					
+				}
+			}
+		}
 		
 	}
+	
+
 	
 	/**
 	 * 
 	 * @param titulo
 	 * @param descripcion
+	 * 
+	 * 
+	 * 
 	 * @param fechaHora
 	 * @author Rafa
 	 */
