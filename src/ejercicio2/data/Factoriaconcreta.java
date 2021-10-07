@@ -1,23 +1,42 @@
 package ejercicio2.data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
 public class Factoriaconcreta implements IFactoria {
 
 	@Override
-	public Espectaculopuntual createEspectaculoPuntual() {
+	public Espectaculopuntual createEspectaculoPuntual(String titulo, String descripcion, Categoriaevento categoria, Sesiones sesion) {
 		// TODO Auto-generated method stub
-		return null;
+		Espectaculopuntual puntual = new Espectaculopuntual();
+		puntual.setRepresentacion(sesion);
+		puntual.setTitulo(titulo);
+		puntual.setDescripcion(descripcion);
+		puntual.setCategoriaevento(categoria);
+		return puntual;
 	}
 
 	@Override
-	public Espectaculopasemultiple createEspectaculoPaseMultiple() {
+	public Espectaculopasemultiple createEspectaculoPaseMultiple(String titulo, String descripcion, Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
 		// TODO Auto-generated method stub
-		return null;
+		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
+		multiple.setTitulo(titulo);
+		multiple.setDescripcion(descripcion);
+		multiple.setCategoriaevento(categoria);
+		multiple.setRepresentaciones(pasemultiple);
+		return multiple;
 	}
 
 	@Override
-	public Espectaculotemporada createEspectaculoTemporada() {
+	public Espectaculotemporada createEspectaculoTemporada(String titulo, String descripcion, Categoriaevento categoria, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
 		// TODO Auto-generated method stub
-		return null;
+		Espectaculotemporada temporada = new Espectaculotemporada();
+		temporada.setTitulo(titulo);
+		temporada.setDescripcion(descripcion);
+		temporada.setCategoriaevento(categoria);
+		temporada.Calcularfecha(fechaInicio, fechaFin, hora);
+		return temporada;
 	}
 
 }

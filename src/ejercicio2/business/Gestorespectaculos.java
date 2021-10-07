@@ -21,6 +21,7 @@ import ejercicio2.data.Espectaculo;
 import ejercicio2.data.Espectaculopasemultiple;
 import ejercicio2.data.Espectaculopuntual;
 import ejercicio2.data.Espectaculotemporada;
+import ejercicio2.data.Factoriaconcreta;
 
 public class Gestorespectaculos {
 	private static Gestorespectaculos instance = null;
@@ -46,32 +47,19 @@ public class Gestorespectaculos {
 	 * @author Rafael
 	 */
 	public void Altaespectaculopasepuntual(String titulo, String descripcion, Categoriaevento categoria, Sesiones sesion) {
-		Espectaculopuntual puntual = new Espectaculopuntual();
-		puntual.setRepresentacion(sesion);
-		puntual.setTitulo(titulo);
-		puntual.setDescripcion(descripcion);
-		puntual.setCategoriaevento(categoria);
-		espectaculos.add(puntual);
-	
+		Factoriaconcreta factoria = new Factoriaconcreta();
+		espectaculos.add(factoria.createEspectaculoPuntual(titulo, descripcion, categoria, sesion));
 	}
 	
 	public void Altaespectaculotemporada(String titulo, String descripcion, Categoriaevento categoria, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
-		Espectaculotemporada temporada = new Espectaculotemporada();
-		temporada.setTitulo(titulo);
-		temporada.setDescripcion(descripcion);
-		temporada.setCategoriaevento(categoria);
-		temporada.Calcularfecha(fechaInicio, fechaFin, hora);
-		espectaculos.add(temporada);
-		}
+		Factoriaconcreta factoria = new Factoriaconcreta();
+		espectaculos.add(factoria.createEspectaculoTemporada(titulo, descripcion, categoria, fechaInicio, fechaFin, hora));
+	}
 	
 	public void Altaespectaculopasemultiple(String titulo, String descripcion, Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
-		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
-		multiple.setTitulo(titulo);
-		multiple.setDescripcion(descripcion);
-		multiple.setCategoriaevento(categoria);
-		multiple.setRepresentaciones(pasemultiple);
-		espectaculos.add(multiple);
-		}
+		Factoriaconcreta factoria = new Factoriaconcreta();
+		espectaculos.add(factoria.createEspectaculoPaseMultiple(titulo, descripcion, categoria, pasemultiple));
+	}
 	
 	/**
 	 * 

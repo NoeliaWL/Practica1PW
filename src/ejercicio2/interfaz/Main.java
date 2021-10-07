@@ -1,6 +1,7 @@
 package ejercicio2.interfaz;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ import ejercicio2.business.Gestorcriticas;
 import ejercicio2.business.Gestorespectaculos;
 import ejercicio2.data.Categoriaevento;
 import ejercicio2.data.Factoriaconcreta;
+import ejercicio2.data.Sesiones;
 import ejercicio2.data.TipoUsuario;
 
 public class Main {
@@ -27,7 +29,9 @@ public class Main {
 		Boolean bandera = false;
 		TipoUsuario tipoUsuario = TipoUsuario.DEFAULT;
 		String nombre = "", apellidos = "", nick = "", correo = "", contrasena = "";
-		String titulo = "";
+		String titulo = "", descripcion = "", fecha = "", hora = "";
+		Categoriaevento categoria = Categoriaevento.DEFAULT;
+		Sesiones sesion = new Sesiones();
 		int index = 0, puntuacion = 0;
 		String buffer = "";
 		
@@ -158,18 +162,47 @@ public class Main {
 								menuEspectaculos();
 								tipo = Integer.parseInt(reader.nextLine());
 								
-								Factoriaconcreta factoria = new Factoriaconcreta();
 								switch(tipo){
 									case 1:
-										factoria.createEspectaculoPuntual();
+										//Puntual
+										System.out.println("Introduzca el titulo del espectaculo: ");
+										titulo = reader.nextLine();
+										System.out.println("Introduzca la descripcion del espectaculo: ");
+										descripcion = reader.nextLine();
+										
+										menuCategoria();
+										switch(tipo){
+											case 1:
+												//Monologo
+												categoria = Categoriaevento.MONOLOGO;
+												break;
+												
+											case 2:
+												//Concierto
+												categoria = Categoriaevento.CONCIERTO;
+												break;
+												
+											case 3:
+												//obra de teatro
+												categoria = Categoriaevento.OBRADETEATRO;
+												break;
+										}
+										
+										System.out.println("Introduzca una fecha de representacion del espectaculo: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca una hora de representacion del espectaculo: ");
+										hora = reader.nextLine();
+										sesion.setFechaRepresentacion(LocalDate.parse(fecha));
+										sesion.setHora(hora);
+										gestorespectaculos.Altaespectaculopasepuntual(titulo, descripcion, categoria, sesion);
 										break;
 										
 									case 2:
-										factoria.createEspectaculoPaseMultiple();
+										//Pase multiple
 										break;
 										
 									case 3:
-										factoria.createEspectaculoTemporada();
+										//De temporada
 										break;
 								}
 								break;
