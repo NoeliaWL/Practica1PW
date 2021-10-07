@@ -409,7 +409,8 @@ public class Gestorcriticas {
 			buffere = new PrintWriter(fe);
 
 			for (Espectador e : espectadores) {
-				buffere.println(e.getNombre() + ";" + e.getApellidos() + ";" + e.getUsuario() + ";" + e.getCorreo());
+				buffere.println(e.getNombre() + ";" + e.getApellidos() + ";" + e.getUsuario() + ";" + e.getCorreo()
+						+ ";" + e.getContrasena() + ";" + e.getTipo());
 			}
 
 			ArrayList<Valoraciones> val = new ArrayList<Valoraciones>();
@@ -422,7 +423,7 @@ public class Gestorcriticas {
 				}
 
 				bufferc.println(c.getCorreoPropietario() + ";" + c.getTitulo() + ";" + c.getPuntuacion() + ";"
-						+ c.getResena() + ";" + valFichero);
+						+ c.getResena() + ";" + c.getTituloEspectaculo() + ";" + valFichero);
 				valFichero = "";
 			}
 		} catch (FileNotFoundException e) {
@@ -486,6 +487,13 @@ public class Gestorcriticas {
 					espectador.setApellidos(lineaCampos[1]);
 					espectador.setUsuario(lineaCampos[2]);
 					espectador.setCorreo(lineaCampos[3]);
+					espectador.setContrasena(lineaCampos[4]);
+					if(lineaCampos[5] == "ADMINISTRADOR"){
+						espectador.setTipo(TipoUsuario.ADMINISTRADOR);
+					}
+					else if(lineaCampos[5] == "ESPECTADOR"){
+						espectador.setTipo(TipoUsuario.ESPECTADOR);
+					}
 
 					espectadores.add(espectador);
 				}
@@ -509,8 +517,9 @@ public class Gestorcriticas {
 					critica.setTitulo(lineaCampos[1]);
 					critica.setPuntuacion(Integer.parseInt(lineaCampos[2]));
 					critica.setResena(lineaCampos[3]);
+					critica.setTituloEspectaculo(lineaCampos[4]);
 
-					lineaValoraciones = lineaCampos[4].split(",");
+					lineaValoraciones = lineaCampos[5].split(",");
 					for (int i = 0; i < lineaValoraciones.length; i++) {
 						camposValoraciones = lineaValoraciones[i].split("/");
 						val.setCorreo(camposValoraciones[0]);

@@ -32,4 +32,8 @@ public class Espectaculotemporada extends Espectaculo {
 		return temporada;
 	}
 
+	public void setTemporada(ArrayList<Sesiones> temporada) {
+		this.temporada = temporada;
+	}
+
 }
