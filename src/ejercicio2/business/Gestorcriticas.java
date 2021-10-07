@@ -175,12 +175,13 @@ public class Gestorcriticas {
 	 * @return Nada.
 	 * @author Noelia Hinojosa Sanchez
 	 */
-	public void creaCritica(String titulo, int puntuacion, String resena, String correo) {
+	public void creaCritica(String titulo, int puntuacion, String resena, String correo, String tituloEspectaculo) {
 		Critica critica = new Critica();
 		critica.setTitulo(titulo);
 		critica.setPuntuacion(puntuacion);
 		critica.setResena(resena);
 		critica.setCorreoPropietario(correo);
+		critica.setTituloEspectaculo(tituloEspectaculo);
 		criticas.add(critica);
 	}
 
@@ -198,7 +199,8 @@ public class Gestorcriticas {
 			buffer.append("Indice: " + criticas.indexOf(c) + "\n");
 			buffer.append("Titulo: " + c.getTitulo() + " ");
 			buffer.append("Puntuacion: " + c.getPuntuacion());
-			buffer.append("\nResena: " + c.getResena());
+			buffer.append("Titulo Espectaculo: " + c.getTituloEspectaculo() + "\n");
+			buffer.append("Resena: " + c.getResena());
 			if (c.getValoraciones().size() != 0) {
 				for (Valoraciones v : c.getValoraciones()) {
 					media += v.getValoracion();
@@ -228,7 +230,8 @@ public class Gestorcriticas {
 				buffer.append("Indice: " + criticas.indexOf(c) + "\n");
 				buffer.append("Titulo: " + c.getTitulo() + " ");
 				buffer.append("Puntuacion: " + c.getPuntuacion());
-				buffer.append("\nResena: " + c.getResena());
+				buffer.append("Titulo Espectaculo: " + c.getTituloEspectaculo() + "\n");
+				buffer.append("Resena: " + c.getResena());
 				if (c.getValoraciones().size() != 0) {
 					for (Valoraciones v : c.getValoraciones()) {
 						media += v.getValoracion();
@@ -253,7 +256,8 @@ public class Gestorcriticas {
 				buffer.append("Indice: " + criticas.indexOf(c) + "\n");
 				buffer.append("Titulo: " + c.getTitulo() + " ");
 				buffer.append("Puntuacion: " + c.getPuntuacion());
-				buffer.append("\nResena: " + c.getResena());
+				buffer.append("Titulo Espectaculo: " + c.getTituloEspectaculo() + "\n");
+				buffer.append("Resena: " + c.getResena());
 				if (c.getValoraciones().size() != 0) {
 					for (Valoraciones v : c.getValoraciones()) {
 						media += v.getValoracion();
@@ -552,16 +556,16 @@ public class Gestorcriticas {
 		}
 		return usuario;
 	}
-	
-	public Boolean comprobarPropietario(String correo){
+
+	public Boolean comprobarPropietario(String correo) {
 		Boolean bandera = false;
-		
-		for(Critica c : criticas){
-			if(c.getCorreoPropietario().equals(correo)){
+
+		for (Critica c : criticas) {
+			if (c.getCorreoPropietario().equals(correo)) {
 				bandera = true;
 			}
 		}
-		
+
 		return bandera;
 	}
 }

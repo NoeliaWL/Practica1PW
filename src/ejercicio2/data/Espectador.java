@@ -122,11 +122,11 @@ public class Espectador {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public String getContrasena() {
 		return contrasena;
 	}
-	
+
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}

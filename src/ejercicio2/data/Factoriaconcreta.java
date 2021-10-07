@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class Factoriaconcreta implements IFactoria {
 
 	@Override
-	public Espectaculopuntual createEspectaculoPuntual(String titulo, String descripcion, Categoriaevento categoria, Sesiones sesion) {
+	public Espectaculopuntual createEspectaculoPuntual(String titulo, String descripcion, Categoriaevento categoria,
+			Sesiones sesion) {
 		// TODO Auto-generated method stub
 		Espectaculopuntual puntual = new Espectaculopuntual();
 		puntual.setRepresentacion(sesion);
@@ -18,18 +19,20 @@ public class Factoriaconcreta implements IFactoria {
 	}
 
 	@Override
-	public Espectaculopasemultiple createEspectaculoPaseMultiple(String titulo, String descripcion, Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
+	public Espectaculopasemultiple createEspectaculoPaseMultiple(String titulo, String descripcion,
+			Categoriaevento categoria, ArrayList<Sesiones> pasemultiple) {
 		// TODO Auto-generated method stub
 		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
 		multiple.setTitulo(titulo);
 		multiple.setDescripcion(descripcion);
 		multiple.setCategoriaevento(categoria);
-		multiple.setRepresentaciones(pasemultiple);
+		multiple.setPasemultiple(pasemultiple);
 		return multiple;
 	}
 
 	@Override
-	public Espectaculotemporada createEspectaculoTemporada(String titulo, String descripcion, Categoriaevento categoria, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
+	public Espectaculotemporada createEspectaculoTemporada(String titulo, String descripcion, Categoriaevento categoria,
+			LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
 		// TODO Auto-generated method stub
 		Espectaculotemporada temporada = new Espectaculotemporada();
 		temporada.setTitulo(titulo);

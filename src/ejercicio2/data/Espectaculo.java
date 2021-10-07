@@ -1,6 +1,5 @@
 package ejercicio2.data;
 
-
 /**
  * Clase Espectaculo tiene todos los metodos para gestionar los datos de un
  * espectaculo.
@@ -16,8 +15,6 @@ public class Espectaculo {
 	private String descripcion;
 
 	Categoriaevento categoria;
-	
-	private int entradas;
 
 	public Espectaculo() {
 
@@ -82,14 +79,4 @@ public class Espectaculo {
 	public void setCategoriaevento(Categoriaevento categoria) {
 		this.categoria = categoria;
 	}
-	
-	public int getEntradas() {
-		return entradas;
-	}
-	
-	public void setEntradas(int entradas) {
-		this.entradas = entradas;
-	}
-		
-
 }
