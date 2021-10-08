@@ -29,11 +29,11 @@ public class Main {
 		int opcionInicio = 0, opcion = 0, tipo = 0, numero = 0, subtipo = 0, subopcion = 0;
 		Boolean bandera = false;
 		TipoUsuario tipoUsuario = TipoUsuario.DEFAULT;
-		String nombre = "", apellidos = "", nick = "", correo = "", contrasena = "";
+		String nombre = "", apellidos = "", nick = "", correo = "", contrasena = "", resena = "";
 		String titulo = "", descripcion = "", fecha = "", fechaFin = "", hora = "";
 		Categoriaevento categoria = Categoriaevento.DEFAULT;
 		Sesiones sesion = new Sesiones();
-		int index = 0, puntuacion = 0, indexSesion = 0, actualizar = 0;
+		int index = 0, puntuacion = 0, indexSesion = 0, actualizar = 0, sesionOpcion, venta = 0;
 		String buffer = "";
 		ArrayList<Sesiones> sesiones = new ArrayList<Sesiones>();
 
@@ -245,6 +245,7 @@ public class Main {
 								descripcion = reader.nextLine();
 
 								menuCategoria();
+								tipo = Integer.parseInt(reader.nextLine());
 								switch (tipo) {
 								case 1:
 									// Monologo
@@ -310,10 +311,18 @@ public class Main {
 							
 							menuActualizar();
 							tipo = Integer.parseInt(reader.nextLine());
+							sesion.setFecha(null);
+							sesion.setHora(null);
+							descripcion = "";
+							sesiones.clear();
+							fecha = "1000-01-01";
+							fechaFin = "1000-01-01";
+							hora = "00:00";
 							if(gestorespectaculos.tipoEspectaculo(index) == 1){
 								if(tipo == 1){
 									System.out.println("Introduzca la nueva descripcion: ");
 									descripcion = reader.nextLine();
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 								}
 								else if(tipo == 2){
 									System.out.println("Introduzca la nueva fecha: ");
@@ -322,30 +331,119 @@ public class Main {
 									hora = reader.nextLine();
 									sesion.setFecha(LocalDate.parse(fecha));
 									sesion.setHora(LocalTime.parse(hora));
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
+								}
+								else if(tipo == 3){
+									System.out.println("Introduzca la nueva descripcion: ");
+									descripcion = reader.nextLine();
+									System.out.println("Introduzca la nueva fecha: ");
+									fecha = reader.nextLine();
+									System.out.println("Introduzca la nueva hora: ");
+									hora = reader.nextLine();
+									sesion.setFecha(LocalDate.parse(fecha));
+									sesion.setHora(LocalTime.parse(hora));
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 								}
 							}
 							else if(gestorespectaculos.tipoEspectaculo(index) == 2){
 								if(tipo == 1){
 									System.out.println("Introduzca la nueva descripcion: ");
 									descripcion = reader.nextLine();
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 								}
 								else if(tipo == 2){
-									gestorespectaculos.MostrarSesionesPaseMultiple(index);
 									menuSesionesActualizar();
 									actualizar = Integer.parseInt(reader.nextLine());
 									
+									gestorespectaculos.MostrarSesionesPaseMultiple(index);
 									switch(actualizar){
 									case 1:
 										//Modificar
+										System.out.println("Introduzca el indice de la sesion a modificar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										System.out.println("Introduzca la nueva fecha de la sesion: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca la nueva hora de la sesion: ");
+										hora = reader.nextLine();
+										sesion.setFecha(LocalDate.parse(fecha));
+										sesion.setHora(LocalTime.parse(hora));
+										sesiones.remove(sesionOpcion);
+										sesiones.add(sesion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 										break;
 										
 									case 2:
 										//eliminar
-										
+										System.out.println("Introduzca el indice de la sesion a eliminar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										sesiones.remove(sesionOpcion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 										break;
 										
 									case 3:
 										//añadir
+										System.out.println("Introduzca el indice de la sesion a eliminar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										System.out.println("Introduzca la fecha de la sesion: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca la hora de la sesion: ");
+										hora = reader.nextLine();
+										sesion.setFecha(LocalDate.parse(fecha));
+										sesion.setHora(LocalTime.parse(hora));
+										sesiones.add(sesion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
+										break;
+									}
+								}
+								else if(tipo == 3){
+									System.out.println("Introduzca la nueva descripcion: ");
+									descripcion = reader.nextLine();
+									menuSesionesActualizar();
+									actualizar = Integer.parseInt(reader.nextLine());
+									
+									gestorespectaculos.MostrarSesionesPaseMultiple(index);
+									switch(actualizar){
+									case 1:
+										//Modificar
+										System.out.println("Introduzca el indice de la sesion a modificar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										System.out.println("Introduzca la nueva fecha de la sesion: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca la nueva hora de la sesion: ");
+										hora = reader.nextLine();
+										sesion.setFecha(LocalDate.parse(fecha));
+										sesion.setHora(LocalTime.parse(hora));
+										sesiones.remove(sesionOpcion);
+										sesiones.add(sesion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
+										break;
+										
+									case 2:
+										//eliminar
+										System.out.println("Introduzca el indice de la sesion a eliminar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										sesiones.remove(sesionOpcion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
+										break;
+										
+									case 3:
+										//añadir
+										System.out.println("Introduzca el indice de la sesion a eliminar: ");
+										sesionOpcion = Integer.parseInt(reader.nextLine());
+										sesiones = gestorespectaculos.getSesionesMultiple(index);
+										System.out.println("Introduzca la fecha de la sesion: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca la hora de la sesion: ");
+										hora = reader.nextLine();
+										sesion.setFecha(LocalDate.parse(fecha));
+										sesion.setHora(LocalTime.parse(hora));
+										sesiones.add(sesion);
+										gestorespectaculos.Actualizardatosespectaculo(index, descripcion, sesiones);
 										break;
 									}
 								}
@@ -354,25 +452,51 @@ public class Main {
 								if(tipo == 1){
 									System.out.println("Introduzca la nueva descripcion: ");
 									descripcion = reader.nextLine();
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
 								}
 								else if(tipo == 2){
-									System.out.println("Introduzca la nueva fecha: ");
+									System.out.println("Introduzca la nueva fecha de inicio: ");
 									fecha = reader.nextLine();
+									System.out.println("Introduzca la nueva fecha de fin: ");
+									fechaFin = reader.nextLine();
 									System.out.println("Introduzca la nueva hora: ");
 									hora = reader.nextLine();
-									sesion.setFecha(LocalDate.parse(fecha));
-									sesion.setHora(LocalTime.parse(hora));
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
+								}
+								else if(tipo == 3){
+									System.out.println("Introduzca la nueva descripcion: ");
+									descripcion = reader.nextLine();
+									System.out.println("Introduzca la nueva fecha de inicio: ");
+									fecha = reader.nextLine();
+									System.out.println("Introduzca la nueva fecha de fin: ");
+									fechaFin = reader.nextLine();
+									System.out.println("Introduzca la nueva hora: ");
+									hora = reader.nextLine();
+									gestorespectaculos.Actualizardatosespectaculo(index, descripcion, LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
 								}
 							}
 							break;
 
 						case 4:
 							// Contabilizar venta de entradas para una sesion
+							buffer = gestorespectaculos.Mostrarsesiones();
+							System.out.println(buffer);
+							System.out.println("Introduzca indice del espectaculo: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca indice de la sesion: ");
+							sesionOpcion = Integer.parseInt(reader.nextLine());
+							System.out.println("Las entradas vendidas para esa sesion del espectaculo son: " + gestorespectaculos.ContabilizarVentaEntradas(index, sesionOpcion));
 							break;
 
 						case 5:
-							// Consultar localidades disponibles de un
-							// espectaculo
+							// Consultar entradas disponibles de un espectaculo
+							buffer = gestorespectaculos.Mostrarsesiones();
+							System.out.println(buffer);
+							System.out.println("Introduzca indice del espectaculo: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca indice de la sesion: ");
+							sesionOpcion = Integer.parseInt(reader.nextLine());
+							System.out.println("Las entradas disponibles para esa sesion del espectaculo son: " + gestorespectaculos.ConsultarEntradasDisponibles(index, sesionOpcion));
 							break;
 
 						case 6:
@@ -417,24 +541,85 @@ public class Main {
 							break;
 
 						case 7:
-							// Buscar espectaculos con entradas disponibles (con
-							// o sin indicar categoria)
+							// Buscar espectaculos con entradas disponibles (con o sin indicar categoria)
+							System.out.println("¿Buscar entradas disponibles segun categoria del espectaculo? (1.Si / 2.No)");
+							subopcion = Integer.parseInt(reader.nextLine());
+							if(subopcion == 1){
+								menuCategoria();
+								tipo = Integer.parseInt(reader.nextLine());
+								switch (tipo) {
+								case 1:
+									// Monologo
+									categoria = Categoriaevento.MONOLOGO;
+									break;
+
+								case 2:
+									// Concierto
+									categoria = Categoriaevento.CONCIERTO;
+									break;
+
+								case 3:
+									// obra de teatro
+									categoria = Categoriaevento.OBRADETEATRO;
+									break;
+								}
+								buffer = gestorespectaculos.BuscarEspectaculosEntradasDisponibles(categoria);
+								System.out.println(buffer);
+							}
+							else if(subopcion == 2){
+								buffer = gestorespectaculos.BuscarEspectaculosEntradasDisponibles();
+								System.out.println(buffer);
+							}
 							break;
 
+							
 						case 8:
+							//Venta de entradas
+							buffer = gestorespectaculos.Mostrarsesiones();
+							System.out.println(buffer);
+							System.out.println("Introduzca indice del espectaculo: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca indice de la sesion: ");
+							sesionOpcion = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca el numero de entradas que desea comprar: ");
+							venta = Integer.parseInt(reader.nextLine());
+							gestorespectaculos.VentaEntradas(index, indexSesion, venta);
+							break;
+							
+						case 9:
 							// Publicar critica de un espectaculo celebrado
+							System.out.println("Introduzca su correo de la critica: ");
+							correo = reader.nextLine();
+							
+							if (gestorcriticas.comprobarFormatoCorreo(correo)) {
+								if (gestorcriticas.correoRegistrado(correo)) {
+									buffer = gestorespectaculos.Mostrarsesiones();
+									System.out.println(buffer);
+									System.out.println("Introduzca indice del espectaculo: ");
+									index = Integer.parseInt(reader.nextLine());
+									System.out.println("Introduzca indice de la sesion: ");
+									sesionOpcion = Integer.parseInt(reader.nextLine());
+									System.out.println("Introduzca el titulo de la critica: ");
+									titulo = reader.nextLine();
+									System.out.println("Introduzca la puntuacion: ");
+									puntuacion = Integer.parseInt(reader.nextLine());
+									System.out.println("Introduzca la resena de la critica: ");
+									resena = reader.nextLine();
+									
+									gestorespectaculos.PublicarCritica(index, indexSesion, titulo, puntuacion, resena, correo);
+								}
+							}
 							break;
 
-						case 9:
-							// Consultar criticas de un espectaculo segun su
-							// titulo
+						case 10:
+							// Consultar criticas de un espectaculo segun su titulo
 							System.out.println("Introduzca el titulo del espectaculo: ");
 							titulo = reader.nextLine();
 							buffer = gestorespectaculos.Consultarcriticas(titulo);
 							System.out.println(buffer);
 							break;
 
-						case 10:
+						case 11:
 							// Eliminar critica de un espectaculo (solo el
 							// propietario de la critica)
 							System.out.println("Introduzca el titulo del espectaculo: ");
@@ -457,7 +642,7 @@ public class Main {
 							}
 							break;
 
-						case 11:
+						case 12:
 							// Valorar una critica de otro usuario
 							buffer = gestorcriticas.getCriticas();
 							System.out.println(buffer);
@@ -479,14 +664,14 @@ public class Main {
 							}
 							break;
 
-						case 12:
+						case 13:
 							System.out.println("Sesion cerrada.");
 							break;
 
 						default:
 							System.out.println("Opcion no valida, vuelva a intentarlo.");
 						}
-					} while (opcion != 12);
+					} while (opcion != 13);
 				} else if (bandera && (tipoUsuario == TipoUsuario.ESPECTADOR)) {
 					do {
 						menuPrincipalEspectador();
@@ -605,11 +790,12 @@ public class Main {
 		System.out.println("5. Consultar localidades disponibles de un espectaculo");
 		System.out.println("6. Buscar un espectaculo");
 		System.out.println("7. Buscar espectaculos con entradas disponibles");
-		System.out.println("8. Publicar una critica");
-		System.out.println("9. Consultar criticas de un espectaculo");
-		System.out.println("10. Eliminar una critica");
-		System.out.println("11. Valorar la utilidad de una critica");
-		System.out.println("12. Cerrar sesion");
+		System.out.println("8. Venta de entradas");
+		System.out.println("9. Publicar una critica");
+		System.out.println("10. Consultar criticas de un espectaculo");
+		System.out.println("11. Eliminar una critica");
+		System.out.println("12. Valorar la utilidad de una critica");
+		System.out.println("13. Cerrar sesion");
 	}
 
 	public static void menuPrincipalEspectador() {
@@ -654,6 +840,7 @@ public class Main {
 		System.out.println("Elige una opcion: ");
 		System.out.println("1. Descripcion");
 		System.out.println("2. Sesiones");
+		System.out.println("3. Ambos");
 	}
 	
 	public static void menuSesionesActualizar(){

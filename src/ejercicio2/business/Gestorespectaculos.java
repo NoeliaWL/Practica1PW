@@ -129,87 +129,81 @@ public class Gestorespectaculos {
 
 	}
 
-	public void Actualizardatosespectaculos(String titulo, String descripcion, Sesiones sesion) {
-		for (Espectaculo e : espectaculos) {
-			if (e.getTitulo().equals(titulo) && e instanceof Espectaculopuntual) {
-				((Espectaculopuntual) e).setDescripcion(descripcion);
-				((Espectaculopuntual) e).setRepresentacion(sesion);
+	public void Actualizardatosespectaculos(int index, String descripcion, Sesiones sesion) {
+		if (espectaculos.get(index) instanceof Espectaculopuntual) {
+			Espectaculopuntual puntual = (Espectaculopuntual) espectaculos.get(index);
+			if(descripcion.equals("")){
+				puntual.setRepresentacion(sesion);
+			}
+			else if(sesion.getFecha() == null){
+				puntual.setDescripcion(descripcion);
+			}
+			else{
+				puntual.setDescripcion(descripcion);
+				puntual.setRepresentacion(sesion);
 			}
 		}
 	}
 
-	public void Actualizardatosespectaculo(String titulo, String descripcion, ArrayList<Sesiones> sesiones) {
-		for (Espectaculo e : espectaculos) {
-			if (e.getTitulo().equals(titulo) && e instanceof Espectaculopasemultiple) {
-				((Espectaculopasemultiple) e).setDescripcion(descripcion);
-				((Espectaculopasemultiple) e).setPasemultiple(sesiones);
+	public void Actualizardatosespectaculo(int index, String descripcion, ArrayList<Sesiones> sesiones) {
+		if (espectaculos.get(index) instanceof Espectaculopasemultiple) {
+			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
+			if(descripcion.equals("")){
+				multiple.setPasemultiple(sesiones);
+			}
+			else if(sesiones.isEmpty()){
+				multiple.setDescripcion(descripcion);
+			}
+			else{
+				multiple.setDescripcion(descripcion);
+				multiple.setPasemultiple(sesiones);
 			}
 		}
 	}
 
-	public void Actualizardatosespectaculo(String titulo, String descripcion, LocalDate inicio, LocalDate fin,
+	public void Actualizardatosespectaculo(int index, String descripcion, LocalDate inicio, LocalDate fin,
 			LocalTime hora) {
-		for (Espectaculo e : espectaculos) {
-			if (e.getTitulo().equals(titulo) && e instanceof Espectaculotemporada) {
-				((Espectaculotemporada) e).setDescripcion(descripcion);
-				((Espectaculotemporada) e).Calcularfecha(inicio, fin, hora);
+		if(espectaculos.get(index) instanceof Espectaculotemporada){
+			Espectaculotemporada temporada = (Espectaculotemporada) espectaculos.get(index);
+			if(descripcion.equals("")){
+				temporada.Calcularfecha(inicio, fin, hora);
+			}
+			else if(inicio.equals(LocalDate.parse("1000-01-01"))){
+				temporada.setDescripcion(descripcion);
+			}
+			else{
+				temporada.setDescripcion(descripcion);
+				temporada.Calcularfecha(inicio, fin, hora);
 			}
 		}
 	}
 
-	public int ContabilizarVentaEntradas(String titulo, Sesiones sesion) {
+	public int ContabilizarVentaEntradas(int index, int indexSesion) {
 		int entradas = -1;
-		for (Espectaculo e : espectaculos) {
-			if (e.getTitulo().equals(titulo)) {
-				if (e instanceof Espectaculopuntual) {
-					Espectaculopuntual puntual = (Espectaculopuntual) e;
-					if (puntual.getRepresentacion().getFecha().equals(sesion.getFecha())
-							&& puntual.getRepresentacion().getHora().equals(sesion.getHora())) {
-						entradas = ((Espectaculopuntual) e).getRepresentacion().getEntradasVendidas();
-					}
-				} else if (e instanceof Espectaculopasemultiple) {
-					for (Sesiones s : ((Espectaculopasemultiple) e).getPasemultiple()) {
-						if (s.getFecha().equals(sesion.getFecha()) && s.getHora().equals(sesion.getHora())) {
-							entradas = s.getEntradasVendidas();
-						}
-					}
-				} else if (e instanceof Espectaculotemporada) {
-					for (Sesiones s : ((Espectaculotemporada) e).getTemporada()) {
-						if (s.getFecha().equals(sesion.getFecha()) && s.getHora().equals(sesion.getHora())) {
-							entradas = s.getEntradasVendidas();
-						}
-					}
-				}
-			}
+		if (espectaculos.get(index) instanceof Espectaculopuntual) {
+			Espectaculopuntual puntual = (Espectaculopuntual) espectaculos.get(index);
+			entradas = puntual.getRepresentacion().getEntradasVendidas();
+		} else if (espectaculos.get(index) instanceof Espectaculopasemultiple) {
+			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
+			entradas = multiple.getPasemultiple().get(indexSesion).getEntradasVendidas();
+		} else if (espectaculos.get(index) instanceof Espectaculotemporada) {
+			Espectaculotemporada temporada = (Espectaculotemporada) espectaculos.get(index);
+			entradas = temporada.getTemporada().get(indexSesion).getEntradasVendidas();
 		}
 		return entradas;
 	}
 
-	public int ConsultarEntradasDisponibles(String titulo, Sesiones sesion) {
+	public int ConsultarEntradasDisponibles(int index, int indexSesion) {
 		int disponibles = -1;
-		for (Espectaculo e : espectaculos) {
-			if (e.getTitulo().equals(titulo)) {
-				if (e instanceof Espectaculopuntual) {
-					Espectaculopuntual puntual = (Espectaculopuntual) e;
-					if (puntual.getRepresentacion().getFecha().equals(sesion.getFecha())
-							&& puntual.getRepresentacion().getHora().equals(sesion.getHora())) {
-						disponibles = ((Espectaculopuntual) e).getRepresentacion().getTotalEntradas()
-								- ((Espectaculopuntual) e).getRepresentacion().getEntradasVendidas();
-					}
-				} else if (e instanceof Espectaculopasemultiple) {
-					for (Sesiones s : ((Espectaculopasemultiple) e).getPasemultiple()) {
-						if (s.getFecha().equals(sesion.getFecha()) && s.getHora().equals(sesion.getHora())) {
-							disponibles = s.getTotalEntradas() - s.getEntradasVendidas();
-						}
-					}
-				} else if (e instanceof Espectaculotemporada) {
-					for (Sesiones s : ((Espectaculotemporada) e).getTemporada()) {
-						if (s.getFecha().equals(sesion.getFecha()) && s.getHora().equals(sesion.getHora())) {
-							disponibles = s.getTotalEntradas() - s.getEntradasVendidas();
-						}
-					}
-				}
-			}
+		if (espectaculos.get(index) instanceof Espectaculopuntual) {
+			Espectaculopuntual puntual = (Espectaculopuntual) espectaculos.get(index);
+			disponibles = puntual.getRepresentacion().getTotalEntradas() - puntual.getRepresentacion().getEntradasVendidas();
+		} else if (espectaculos.get(index) instanceof Espectaculopasemultiple) {
+			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
+			disponibles = multiple.getPasemultiple().get(indexSesion).getTotalEntradas() - multiple.getPasemultiple().get(indexSesion).getEntradasVendidas();
+		} else if (espectaculos.get(index) instanceof Espectaculotemporada) {
+			Espectaculotemporada temporada = (Espectaculotemporada) espectaculos.get(index);
+			disponibles = temporada.getTemporada().get(indexSesion).getTotalEntradas() - temporada.getTemporada().get(indexSesion).getEntradasVendidas();
 		}
 		return disponibles;
 	}
@@ -292,7 +286,7 @@ public class Gestorespectaculos {
 		for (Espectaculo e : espectaculos) {
 			if (e instanceof Espectaculopuntual) {
 				Espectaculopuntual puntual = (Espectaculopuntual) e;
-				if (ConsultarEntradasDisponibles(puntual.getTitulo(), puntual.getRepresentacion()) > 0) {
+				if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), 1) > 0) {
 					buffer.append("Titulo:" + puntual.getTitulo() + "\n");
 					buffer.append("Descripcion:" + puntual.getDescripcion() + "\n");
 					buffer.append("Categoria:" + puntual.getCategoria() + "\n");
@@ -304,7 +298,7 @@ public class Gestorespectaculos {
 				imprimido = 0;
 				Espectaculopasemultiple multiple = (Espectaculopasemultiple) e;
 				for (Sesiones s : multiple.getPasemultiple()) {
-					if (ConsultarEntradasDisponibles(multiple.getTitulo(), s) > 0) {
+					if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), multiple.getPasemultiple().indexOf(s)) > 0) {
 						if (imprimido == 0) {
 							buffer.append("Titulo:" + multiple.getTitulo() + "\n");
 							buffer.append("Descripcion:" + multiple.getDescripcion() + "\n");
@@ -320,7 +314,7 @@ public class Gestorespectaculos {
 				imprimido = 0;
 				Espectaculotemporada temporada = (Espectaculotemporada) e;
 				for (Sesiones s : temporada.getTemporada()) {
-					if (ConsultarEntradasDisponibles(temporada.getTitulo(), s) > 0) {
+					if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), temporada.getTemporada().indexOf(s)) > 0) {
 						if (imprimido == 0) {
 							buffer.append("Titulo:" + temporada.getTitulo() + "\n");
 							buffer.append("Descripcion:" + temporada.getDescripcion() + "\n");
@@ -344,7 +338,7 @@ public class Gestorespectaculos {
 			if (e.getCategoria().equals(categoria)) {
 				if (e instanceof Espectaculopuntual) {
 					Espectaculopuntual puntual = (Espectaculopuntual) e;
-					if (ConsultarEntradasDisponibles(puntual.getTitulo(), puntual.getRepresentacion()) > 0) {
+					if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), 1) > 0) {
 						buffer.append("Titulo:" + puntual.getTitulo() + "\n");
 						buffer.append("Descripcion:" + puntual.getDescripcion() + "\n");
 						buffer.append("Categoria:" + puntual.getCategoria() + "\n");
@@ -356,7 +350,7 @@ public class Gestorespectaculos {
 					imprimido = 0;
 					Espectaculopasemultiple multiple = (Espectaculopasemultiple) e;
 					for (Sesiones s : multiple.getPasemultiple()) {
-						if (ConsultarEntradasDisponibles(multiple.getTitulo(), s) > 0) {
+						if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), multiple.getPasemultiple().indexOf(s)) > 0) {
 							if (imprimido == 0) {
 								buffer.append("Titulo:" + multiple.getTitulo() + "\n");
 								buffer.append("Descripcion:" + multiple.getDescripcion() + "\n");
@@ -372,7 +366,7 @@ public class Gestorespectaculos {
 					imprimido = 0;
 					Espectaculotemporada temporada = (Espectaculotemporada) e;
 					for (Sesiones s : temporada.getTemporada()) {
-						if (ConsultarEntradasDisponibles(temporada.getTitulo(), s) > 0) {
+						if (ConsultarEntradasDisponibles(espectaculos.indexOf(e), temporada.getTemporada().indexOf(s)) > 0) {
 							if (imprimido == 0) {
 								buffer.append("Titulo:" + temporada.getTitulo() + "\n");
 								buffer.append("Descripcion:" + temporada.getDescripcion() + "\n");
@@ -674,5 +668,33 @@ public class Gestorespectaculos {
 			tipo = 3;
 		}
 		return tipo;
+	}
+	
+	public ArrayList<Sesiones> getSesionesMultiple(int index){
+		Espectaculopasemultiple multiple = new Espectaculopasemultiple();
+		if(espectaculos.get(index) instanceof Espectaculopasemultiple){
+			multiple = (Espectaculopasemultiple) espectaculos.get(index);
+		}
+		return multiple.getPasemultiple();
+	}
+	
+	public void VentaEntradas(int index, int indexSesion, int entradas){
+		if(entradas > ConsultarEntradasDisponibles(index, indexSesion)){
+			System.out.println("No existen tantas entradas disponibles. Comprueba las entradas en el menu.");
+		}
+		else{
+			if(espectaculos.get(index) instanceof Espectaculopuntual){
+				Espectaculopuntual puntual = (Espectaculopuntual) espectaculos.get(index);
+				puntual.getRepresentacion().setEntradasVendidas(puntual.getRepresentacion().getEntradasVendidas() + entradas);
+			}
+			else if(espectaculos.get(index) instanceof Espectaculopasemultiple){
+				Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
+				multiple.getPasemultiple().get(indexSesion).setEntradasVendidas(multiple.getPasemultiple().get(indexSesion).getEntradasVendidas() + entradas);
+			}
+			else if(espectaculos.get(index) instanceof Espectaculotemporada){
+				Espectaculotemporada temporada = (Espectaculotemporada) espectaculos.get(index);
+				temporada.getTemporada().get(indexSesion).setEntradasVendidas(temporada.getTemporada().get(indexSesion).getEntradasVendidas() + entradas);
+			}
+		}
 	}
 }
