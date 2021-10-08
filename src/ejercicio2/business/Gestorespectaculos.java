@@ -57,19 +57,13 @@ public class Gestorespectaculos {
 		espectaculos.add(factoria.createEspectaculoPaseMultiple(titulo, descripcion, categoria, pasemultiple));
 	}
 
-	public void Cancelarespectaculotodos(String titulo) {
-		for (Espectaculo e : espectaculos)
-			if (e.getTitulo().equals(titulo))
-				espectaculos.remove(e);
+	public void Cancelarespectaculotodos(int index) {
+		espectaculos.remove(index);
 	}
 
 	public void Cancelarespectaculosesion(int indexTitulo, int indexSesion) {
 		if (espectaculos.get(indexTitulo) instanceof Espectaculopuntual) {
-			Espectaculopuntual puntual = (Espectaculopuntual) espectaculos.get(indexTitulo);
-			Sesiones sesion = new Sesiones();
-			sesion.setFecha(null);
-			sesion.setHora(null);
-			puntual.setRepresentacion(sesion);
+			espectaculos.remove(indexTitulo);
 		} else if (espectaculos.get(indexTitulo) instanceof Espectaculopasemultiple) {
 			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(indexTitulo);
 			multiple.getPasemultiple().remove(indexSesion);
@@ -88,7 +82,7 @@ public class Gestorespectaculos {
 				puntual = (Espectaculopuntual) e;
 				buffer.append(
 						"Indice espectaculo: " + espectaculos.indexOf(e) + "\nTitulo: " + puntual.getTitulo() + "\n");
-				buffer.append("\t" + puntual.getRepresentacion().getFecha() + " ");
+				buffer.append("Indice sesion: 1 - " + puntual.getRepresentacion().getFecha() + " ");
 				buffer.append(puntual.getRepresentacion().getHora() + "\n");
 
 			} else if (e instanceof Espectaculopasemultiple) {
@@ -111,6 +105,23 @@ public class Gestorespectaculos {
 					buffer.append(s.getFecha() + " ");
 					buffer.append(s.getHora() + "\n");
 				}
+			}
+		}
+
+		return buffer.toString();
+
+	}
+	
+	public String MostrarSesionesPaseMultiple(int index) {
+		StringBuffer buffer = new StringBuffer();
+		if (espectaculos.get(index) instanceof Espectaculopasemultiple) {
+			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
+			buffer.append(
+					"Indice espectaculo: " + index + "\nTitulo: " + multiple.getTitulo() + "\n");
+			for (Sesiones s : multiple.getPasemultiple()) {
+				buffer.append("Indice sesion: " + multiple.getPasemultiple().indexOf(s) + " - ");
+				buffer.append(s.getFecha() + " ");
+				buffer.append(s.getHora() + "\n");
 			}
 		}
 
@@ -649,5 +660,19 @@ public class Gestorespectaculos {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int tipoEspectaculo(int index){
+		int tipo = 0;
+		if(espectaculos.get(index) instanceof Espectaculopuntual){
+			tipo = 1;
+		}
+		else if(espectaculos.get(index) instanceof Espectaculopasemultiple){
+			tipo = 2;
+		}
+		else if(espectaculos.get(index) instanceof Espectaculotemporada){
+			tipo = 3;
+		}
+		return tipo;
 	}
 }
