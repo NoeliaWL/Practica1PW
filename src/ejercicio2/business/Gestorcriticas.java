@@ -577,4 +577,16 @@ public class Gestorcriticas {
 
 		return bandera;
 	}
+	
+	public Boolean tituloCriticaRegistrado(String titulo){
+		Boolean bandera = false;
+		
+		for(Critica c : criticas){
+			if(c.getTitulo().equals(titulo)){
+				bandera = true;
+			}
+		}
+		
+		return bandera;
+	}
 }

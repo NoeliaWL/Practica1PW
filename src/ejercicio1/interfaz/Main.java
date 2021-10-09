@@ -149,12 +149,10 @@ public class Main {
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
 							user = gestorcriticas.getUsuario(correo);
-							if(user != null){
-								System.out.println("Nombre: " + user.getNombre());
-								System.out.println("Apellidos: " + user.getApellidos());
-								System.out.println("Nickname: " + user.getUsuario());
-								System.out.println("Correo electronico: " + user.getCorreo());
-							}
+							System.out.println("Nombre: " + user.getNombre());
+							System.out.println("Apellidos: " + user.getApellidos());
+							System.out.println("Nickname: " + user.getUsuario());
+							System.out.println("Correo electronico: " + user.getCorreo());
 						} else {
 							System.out.println("Correo electronico no registrado");
 						}
@@ -176,12 +174,17 @@ public class Main {
 						if (gestorcriticas.correoRegistrado(correo)) {
 							System.out.println("Introduzca el titulo de la critica: ");
 							titulo = reader.nextLine();
-							System.out.println("Introduzca la puntuacion dada al espectaculo: ");
-							puntuacion = Integer.parseInt(reader.nextLine());
-							System.out.println("Introduzca la resena del espectaculo: ");
-							resena = reader.nextLine();
+							if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
+								System.out.println("Introduzca la puntuacion dada al espectaculo: ");
+								puntuacion = Integer.parseInt(reader.nextLine());
+								System.out.println("Introduzca la resena del espectaculo: ");
+								resena = reader.nextLine();
 
-							gestorcriticas.creaCritica(titulo, puntuacion, resena, correo);
+								gestorcriticas.creaCritica(titulo, puntuacion, resena, correo);
+							}
+							else{
+								System.out.println("Titulo de critica ya registrado.");
+							}
 						} else {
 							System.out.println("Correo electronico no registrado");
 						}

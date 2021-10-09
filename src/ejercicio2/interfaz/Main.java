@@ -170,108 +170,123 @@ public class Main {
 								// Puntual
 								System.out.println("Introduzca el titulo del espectaculo: ");
 								titulo = reader.nextLine();
-								System.out.println("Introduzca la descripcion del espectaculo: ");
-								descripcion = reader.nextLine();
+								if(!gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+									System.out.println("Introduzca la descripcion del espectaculo: ");
+									descripcion = reader.nextLine();
 
-								menuCategoria();
-								switch (tipo) {
-								case 1:
-									categoria = Categoriaevento.MONOLOGO;
-									break;
+									menuCategoria();
+									switch (tipo) {
+									case 1:
+										categoria = Categoriaevento.MONOLOGO;
+										break;
 
-								case 2:
-									categoria = Categoriaevento.CONCIERTO;
-									break;
+									case 2:
+										categoria = Categoriaevento.CONCIERTO;
+										break;
 
-								case 3:
-									categoria = Categoriaevento.OBRADETEATRO;
-									break;
-								}
+									case 3:
+										categoria = Categoriaevento.OBRADETEATRO;
+										break;
+									}
 
-								System.out.println("Introduzca una fecha de representacion del espectaculo: ");
-								fecha = reader.nextLine();
-								System.out.println("Introduzca una hora de representacion del espectaculo: ");
-								hora = reader.nextLine();
-								sesion.setFecha(LocalDate.parse(fecha));
-								sesion.setHora(LocalTime.parse(hora));
-								gestorespectaculos.Altaespectaculopasepuntual(titulo, descripcion, categoria, sesion);
-								break;
-
-							case 2:
-								// Pase multiple
-								System.out.println("Introduzca el titulo del espectaculo: ");
-								titulo = reader.nextLine();
-								System.out.println("Introduzca la descripcion del espectaculo: ");
-								descripcion = reader.nextLine();
-
-								menuCategoria();
-								switch (tipo) {
-								case 1:
-									// Monologo
-									categoria = Categoriaevento.MONOLOGO;
-									break;
-
-								case 2:
-									// Concierto
-									categoria = Categoriaevento.CONCIERTO;
-									break;
-
-								case 3:
-									// obra de teatro
-									categoria = Categoriaevento.OBRADETEATRO;
-									break;
-								}
-
-								do {
 									System.out.println("Introduzca una fecha de representacion del espectaculo: ");
 									fecha = reader.nextLine();
 									System.out.println("Introduzca una hora de representacion del espectaculo: ");
 									hora = reader.nextLine();
 									sesion.setFecha(LocalDate.parse(fecha));
 									sesion.setHora(LocalTime.parse(hora));
-									sesiones.add(sesion);
-									System.out.println("¿Desea introducir otra fecha de representacion? (1.Si / 2.No)");
-									subopcion = Integer.parseInt(reader.nextLine());
-								} while (subopcion != 2);
-								gestorespectaculos.Altaespectaculopasemultiple(titulo, descripcion, categoria,
-										sesiones);
+									gestorespectaculos.Altaespectaculopasepuntual(titulo, descripcion, categoria, sesion);
+								}
+								else{
+									System.out.println("Titulo de espectaculo ya registrado.");
+								}
+								break;
+
+							case 2:
+								// Pase multiple
+								System.out.println("Introduzca el titulo del espectaculo: ");
+								titulo = reader.nextLine();
+								if(!gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+									System.out.println("Introduzca la descripcion del espectaculo: ");
+									descripcion = reader.nextLine();
+
+									menuCategoria();
+									switch (tipo) {
+									case 1:
+										// Monologo
+										categoria = Categoriaevento.MONOLOGO;
+										break;
+
+									case 2:
+										// Concierto
+										categoria = Categoriaevento.CONCIERTO;
+										break;
+
+									case 3:
+										// obra de teatro
+										categoria = Categoriaevento.OBRADETEATRO;
+										break;
+									}
+
+									do {
+										System.out.println("Introduzca una fecha de representacion del espectaculo: ");
+										fecha = reader.nextLine();
+										System.out.println("Introduzca una hora de representacion del espectaculo: ");
+										hora = reader.nextLine();
+										sesion.setFecha(LocalDate.parse(fecha));
+										sesion.setHora(LocalTime.parse(hora));
+										sesiones.add(sesion);
+										System.out.println("¿Desea introducir otra fecha de representacion? (1.Si / 2.No)");
+										subopcion = Integer.parseInt(reader.nextLine());
+									} while (subopcion != 2);
+									gestorespectaculos.Altaespectaculopasemultiple(titulo, descripcion, categoria,
+											sesiones);
+								}
+								else{
+									System.out.println("Titulo de espectaculo ya registrado.");
+								}
 								break;
 
 							case 3:
 								// De temporada
 								System.out.println("Introduzca el titulo del espectaculo: ");
 								titulo = reader.nextLine();
-								System.out.println("Introduzca la descripcion del espectaculo: ");
-								descripcion = reader.nextLine();
+								if(!gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+									System.out.println("Introduzca la descripcion del espectaculo: ");
+									descripcion = reader.nextLine();
 
-								menuCategoria();
-								tipo = Integer.parseInt(reader.nextLine());
-								switch (tipo) {
-								case 1:
-									// Monologo
-									categoria = Categoriaevento.MONOLOGO;
-									break;
+									menuCategoria();
+									tipo = Integer.parseInt(reader.nextLine());
+									switch (tipo) {
+									case 1:
+										// Monologo
+										categoria = Categoriaevento.MONOLOGO;
+										break;
 
-								case 2:
-									// Concierto
-									categoria = Categoriaevento.CONCIERTO;
-									break;
+									case 2:
+										// Concierto
+										categoria = Categoriaevento.CONCIERTO;
+										break;
 
-								case 3:
-									// obra de teatro
-									categoria = Categoriaevento.OBRADETEATRO;
-									break;
+									case 3:
+										// obra de teatro
+										categoria = Categoriaevento.OBRADETEATRO;
+										break;
+									}
+
+									System.out.println("Introduzca la fecha de inicio de representacion del espectaculo: ");
+									fecha = reader.nextLine();
+									System.out.println(
+											"Introduzca la fecha de finalizacion de representacion del espectaculo: ");
+									fechaFin = reader.nextLine();
+									System.out.println("Introduzca una hora de representacion del espectaculo: ");
+									hora = reader.nextLine();
+									gestorespectaculos.Altaespectaculotemporada(titulo, descripcion, categoria,
+											LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
 								}
-
-								System.out.println("Introduzca la fecha de inicio de representacion del espectaculo: ");
-								fecha = reader.nextLine();
-								System.out.println(
-										"Introduzca la fecha de finalizacion de representacion del espectaculo: ");
-								fechaFin = reader.nextLine();
-								System.out.println("Introduzca una hora de representacion del espectaculo: ");
-								hora = reader.nextLine();
-								gestorespectaculos.Altaespectaculotemporada(titulo, descripcion, categoria,
-										LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
+								else{
+									System.out.println("Titulo de espectaculo ya registrado.");
+								}
 								break;
 							}
 							break;
@@ -280,9 +295,6 @@ public class Main {
 							//Cancelar sesion o sesiones de espectaculos
 							menuCancelar();
 							tipo = Integer.parseInt(reader.nextLine());
-
-							System.out.println("Introduzca el titulo del espectaculo: ");
-							titulo = reader.nextLine();
 
 							switch (tipo) {
 							case 1:
@@ -508,8 +520,13 @@ public class Main {
 								// Buscar por titulo
 								System.out.println("Introduzca el titulo del espectaculo: ");
 								titulo = reader.nextLine();
-								buffer = gestorespectaculos.Buscarespectaculo(titulo);
-								System.out.println(buffer);
+								if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+									buffer = gestorespectaculos.Buscarespectaculo(titulo);
+									System.out.println(buffer);
+								}
+								else{
+									System.out.println("Titulo de espectaculo no registrado.");
+								}
 								break;
 
 							case 2:
@@ -571,7 +588,6 @@ public class Main {
 								System.out.println(buffer);
 							}
 							break;
-
 							
 						case 8:
 							//Venta de entradas
@@ -588,7 +604,7 @@ public class Main {
 							
 						case 9:
 							// Publicar critica de un espectaculo celebrado
-							System.out.println("Introduzca su correo de la critica: ");
+							System.out.println("Introduzca su correo: ");
 							correo = reader.nextLine();
 							
 							if (gestorcriticas.comprobarFormatoCorreo(correo)) {
@@ -601,12 +617,17 @@ public class Main {
 									sesionOpcion = Integer.parseInt(reader.nextLine());
 									System.out.println("Introduzca el titulo de la critica: ");
 									titulo = reader.nextLine();
-									System.out.println("Introduzca la puntuacion: ");
-									puntuacion = Integer.parseInt(reader.nextLine());
-									System.out.println("Introduzca la resena de la critica: ");
-									resena = reader.nextLine();
-									
-									gestorespectaculos.PublicarCritica(index, indexSesion, titulo, puntuacion, resena, correo);
+									if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
+										System.out.println("Introduzca la puntuacion: ");
+										puntuacion = Integer.parseInt(reader.nextLine());
+										System.out.println("Introduzca la resena de la critica: ");
+										resena = reader.nextLine();
+										
+										gestorespectaculos.PublicarCritica(index, indexSesion, titulo, puntuacion, resena, correo);
+									}
+									else{
+										System.out.println("Titulo de la critica ya registrado.");
+									}
 								}
 							}
 							break;
@@ -615,8 +636,13 @@ public class Main {
 							// Consultar criticas de un espectaculo segun su titulo
 							System.out.println("Introduzca el titulo del espectaculo: ");
 							titulo = reader.nextLine();
-							buffer = gestorespectaculos.Consultarcriticas(titulo);
-							System.out.println(buffer);
+							if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+								buffer = gestorespectaculos.Consultarcriticas(titulo);
+								System.out.println(buffer);
+							}
+							else{
+								System.out.println("Titulo de espectaculo no registrado.");
+							}
 							break;
 
 						case 11:
@@ -624,21 +650,26 @@ public class Main {
 							// propietario de la critica)
 							System.out.println("Introduzca el titulo del espectaculo: ");
 							titulo = reader.nextLine();
-							buffer = gestorespectaculos.Consultarcriticas(titulo);
-							System.out.println(buffer);
-							System.out.println("Introduzca el indice de la critica que desea votar: ");
-							index = Integer.parseInt(reader.nextLine());
-							System.out.println("Introduzca su correo electronico: ");
-							correo = reader.nextLine();
+							if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+								buffer = gestorespectaculos.Consultarcriticas(titulo);
+								System.out.println(buffer);
+								System.out.println("Introduzca el indice de la critica que desea votar: ");
+								index = Integer.parseInt(reader.nextLine());
+								System.out.println("Introduzca su correo electronico: ");
+								correo = reader.nextLine();
 
-							if (gestorcriticas.comprobarFormatoCorreo(correo)) {
-								if (gestorcriticas.correoRegistrado(correo)) {
-									gestorespectaculos.EliminarCritica(index, correo);
+								if (gestorcriticas.comprobarFormatoCorreo(correo)) {
+									if (gestorcriticas.correoRegistrado(correo)) {
+										gestorespectaculos.EliminarCritica(index, correo);
+									} else {
+										System.out.println("Correo electronico no registrado");
+									}
 								} else {
-									System.out.println("Correo electronico no registrado");
+									System.out.println("Formato de correo no valido");
 								}
-							} else {
-								System.out.println("Formato de correo no valido");
+							}
+							else{
+								System.out.println("Titulo de espectaculo no registrado.");
 							}
 							break;
 
@@ -681,6 +712,13 @@ public class Main {
 						case 1:
 							// Consultar localidades disponibles de un
 							// espectaculo
+							buffer = gestorespectaculos.Mostrarsesiones();
+							System.out.println(buffer);
+							System.out.println("Introduzca indice del espectaculo: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca indice de la sesion: ");
+							sesionOpcion = Integer.parseInt(reader.nextLine());
+							System.out.println("Las entradas disponibles para esa sesion del espectaculo son: " + gestorespectaculos.ConsultarEntradasDisponibles(index, sesionOpcion));
 							break;
 
 						case 2:
@@ -692,8 +730,13 @@ public class Main {
 								// Buscar por titulo
 								System.out.println("Introduzca el titulo del espectaculo: ");
 								titulo = reader.nextLine();
-								buffer = gestorespectaculos.Buscarespectaculo(titulo);
-								System.out.println(buffer);
+								if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+									buffer = gestorespectaculos.Buscarespectaculo(titulo);
+									System.out.println(buffer);
+								}
+								else{
+									System.out.println("Titulo de espectaculo no registrado.");
+								}
 								break;
 
 							case 2:
@@ -727,10 +770,64 @@ public class Main {
 						case 3:
 							// Buscar espectaculos con entradas disponibles (con
 							// o sin indicar categoria)
+							System.out.println("¿Buscar entradas disponibles segun categoria del espectaculo? (1.Si / 2.No)");
+							subopcion = Integer.parseInt(reader.nextLine());
+							if(subopcion == 1){
+								menuCategoria();
+								tipo = Integer.parseInt(reader.nextLine());
+								switch (tipo) {
+								case 1:
+									// Monologo
+									categoria = Categoriaevento.MONOLOGO;
+									break;
+
+								case 2:
+									// Concierto
+									categoria = Categoriaevento.CONCIERTO;
+									break;
+
+								case 3:
+									// obra de teatro
+									categoria = Categoriaevento.OBRADETEATRO;
+									break;
+								}
+								buffer = gestorespectaculos.BuscarEspectaculosEntradasDisponibles(categoria);
+								System.out.println(buffer);
+							}
+							else if(subopcion == 2){
+								buffer = gestorespectaculos.BuscarEspectaculosEntradasDisponibles();
+								System.out.println(buffer);
+							}
 							break;
 
 						case 4:
 							// Publicar critica de un espectaculo celebrado
+							System.out.println("Introduzca su correo: ");
+							correo = reader.nextLine();
+							
+							if (gestorcriticas.comprobarFormatoCorreo(correo)) {
+								if (gestorcriticas.correoRegistrado(correo)) {
+									buffer = gestorespectaculos.Mostrarsesiones();
+									System.out.println(buffer);
+									System.out.println("Introduzca indice del espectaculo: ");
+									index = Integer.parseInt(reader.nextLine());
+									System.out.println("Introduzca indice de la sesion: ");
+									sesionOpcion = Integer.parseInt(reader.nextLine());
+									System.out.println("Introduzca el titulo de la critica: ");
+									titulo = reader.nextLine();
+									if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
+										System.out.println("Introduzca la puntuacion: ");
+										puntuacion = Integer.parseInt(reader.nextLine());
+										System.out.println("Introduzca la resena de la critica: ");
+										resena = reader.nextLine();
+										
+										gestorespectaculos.PublicarCritica(index, indexSesion, titulo, puntuacion, resena, correo);
+									}
+									else{
+										System.out.println("Titulo de la critica ya registrado.");
+									}
+								}
+							}
 							break;
 
 						case 5:
@@ -738,21 +835,79 @@ public class Main {
 							// titulo
 							System.out.println("Introduzca el titulo del espectaculo: ");
 							titulo = reader.nextLine();
-
-							buffer = gestorespectaculos.Consultarcriticas(titulo);
-							System.out.println(buffer);
+							if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+								buffer = gestorespectaculos.Consultarcriticas(titulo);
+								System.out.println(buffer);
+							}
+							else{
+								System.out.println("Titulo de espectaculo no registrado.");
+							}
 							break;
 
 						case 6:
 							// Eliminar critica de un espectaculo (solo el
 							// propietario de la critica)
+							System.out.println("Introduzca el titulo del espectaculo: ");
+							titulo = reader.nextLine();
+							if(gestorespectaculos.tituloEspectaculoRegistrado(titulo)){
+								buffer = gestorespectaculos.Consultarcriticas(titulo);
+								System.out.println(buffer);
+								System.out.println("Introduzca el indice de la critica que desea votar: ");
+								index = Integer.parseInt(reader.nextLine());
+								System.out.println("Introduzca su correo electronico: ");
+								correo = reader.nextLine();
+
+								if (gestorcriticas.comprobarFormatoCorreo(correo)) {
+									if (gestorcriticas.correoRegistrado(correo)) {
+										gestorespectaculos.EliminarCritica(index, correo);
+									} else {
+										System.out.println("Correo electronico no registrado");
+									}
+								} else {
+									System.out.println("Formato de correo no valido");
+								}
+							}
+							else{
+								System.out.println("Titulo de espectaculo no registrado.");
+							}
 							break;
 
 						case 7:
 							// Valorar una critica de otro usuario
+							buffer = gestorcriticas.getCriticas();
+							System.out.println(buffer);
+							System.out.println("Introduzca el indice de la critica que desea votar: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca la puntuacion de su votacion: ");
+							puntuacion = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca su correo electronico: ");
+							correo = reader.nextLine();
+
+							if (gestorcriticas.comprobarFormatoCorreo(correo)) {
+								if (gestorcriticas.correoRegistrado(correo)) {
+									gestorcriticas.votaCritica(index, correo, puntuacion);
+								} else {
+									System.out.println("Correo electronico no registrado");
+								}
+							} else {
+								System.out.println("Formato de correo no valido");
+							}
 							break;
 
 						case 8:
+							//Venta de entradas
+							buffer = gestorespectaculos.Mostrarsesiones();
+							System.out.println(buffer);
+							System.out.println("Introduzca indice del espectaculo: ");
+							index = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca indice de la sesion: ");
+							sesionOpcion = Integer.parseInt(reader.nextLine());
+							System.out.println("Introduzca el numero de entradas que desea comprar: ");
+							venta = Integer.parseInt(reader.nextLine());
+							gestorespectaculos.VentaEntradas(index, indexSesion, venta);
+							break;
+							
+						case 9:
 							System.out.println("Sesion cerrada.");
 							break;
 
@@ -807,7 +962,8 @@ public class Main {
 		System.out.println("5. Consultar criticas de un espectaculo");
 		System.out.println("6. Eliminar una critica");
 		System.out.println("7. Valorar la utilidad de una critica");
-		System.out.println("8. Cerrar sesion");
+		System.out.println("8. Venta de entradas");
+		System.out.println("9. Cerrar sesion");
 	}
 
 	public static void menuEspectaculos() {

@@ -8,13 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import ejercicio2.data.Sesiones;
-
-import ejercicio2.business.Gestorcriticas;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import ejercicio2.data.Sesiones;
+import ejercicio2.business.Gestorcriticas;
 import ejercicio2.data.Categoriaevento;
 import ejercicio2.data.Espectaculo;
 import ejercicio2.data.Espectaculopasemultiple;
@@ -696,5 +694,17 @@ public class Gestorespectaculos {
 				temporada.getTemporada().get(indexSesion).setEntradasVendidas(temporada.getTemporada().get(indexSesion).getEntradasVendidas() + entradas);
 			}
 		}
+	}
+	
+	public Boolean tituloEspectaculoRegistrado(String titulo){
+		Boolean bandera = false;
+		
+		for(Espectaculo e : espectaculos){
+			if(e.getTitulo().equals(titulo)){
+				bandera = true;
+			}
+		}
+		
+		return bandera;
 	}
 }
