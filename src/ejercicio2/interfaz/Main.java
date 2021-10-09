@@ -70,6 +70,7 @@ public class Main {
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
 							tipoUsuario = gestorcriticas.Loginusuario(correo, contrasena);
+							bandera = true;
 						} else {
 							System.out.println("Correo electronico no registrado");
 							System.out.println("¿Desea registrarlo? (1.Si / 2.No)");
@@ -175,6 +176,7 @@ public class Main {
 									descripcion = reader.nextLine();
 
 									menuCategoria();
+									tipo = Integer.parseInt(reader.nextLine());
 									switch (tipo) {
 									case 1:
 										categoria = Categoriaevento.MONOLOGO;
@@ -189,9 +191,9 @@ public class Main {
 										break;
 									}
 
-									System.out.println("Introduzca una fecha de representacion del espectaculo: ");
+									System.out.println("Introduzca una fecha de representacion del espectaculo (yyyy-MM-dd): ");
 									fecha = reader.nextLine();
-									System.out.println("Introduzca una hora de representacion del espectaculo: ");
+									System.out.println("Introduzca una hora de representacion del espectaculo (HH:mm): ");
 									hora = reader.nextLine();
 									sesion.setFecha(LocalDate.parse(fecha));
 									sesion.setHora(LocalTime.parse(hora));
@@ -229,9 +231,9 @@ public class Main {
 									}
 
 									do {
-										System.out.println("Introduzca una fecha de representacion del espectaculo: ");
+										System.out.println("Introduzca una fecha de representacion del espectaculo (yyyy-MM-dd): ");
 										fecha = reader.nextLine();
-										System.out.println("Introduzca una hora de representacion del espectaculo: ");
+										System.out.println("Introduzca una hora de representacion del espectaculo (HH:mm): ");
 										hora = reader.nextLine();
 										sesion.setFecha(LocalDate.parse(fecha));
 										sesion.setHora(LocalTime.parse(hora));
@@ -274,12 +276,12 @@ public class Main {
 										break;
 									}
 
-									System.out.println("Introduzca la fecha de inicio de representacion del espectaculo: ");
+									System.out.println("Introduzca la fecha de inicio de representacion del espectaculo (yyyy-MM-dd): ");
 									fecha = reader.nextLine();
 									System.out.println(
-											"Introduzca la fecha de finalizacion de representacion del espectaculo: ");
+											"Introduzca la fecha de finalizacion de representacion del espectaculo (yyyy-MM-dd): ");
 									fechaFin = reader.nextLine();
-									System.out.println("Introduzca una hora de representacion del espectaculo: ");
+									System.out.println("Introduzca una hora de representacion del espectaculo (HH:mm): ");
 									hora = reader.nextLine();
 									gestorespectaculos.Altaespectaculotemporada(titulo, descripcion, categoria,
 											LocalDate.parse(fecha), LocalDate.parse(fechaFin), LocalTime.parse(hora));
@@ -618,7 +620,7 @@ public class Main {
 									System.out.println("Introduzca el titulo de la critica: ");
 									titulo = reader.nextLine();
 									if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
-										System.out.println("Introduzca la puntuacion: ");
+										System.out.println("Introduzca la puntuacion (De 1 a 10): ");
 										puntuacion = Integer.parseInt(reader.nextLine());
 										System.out.println("Introduzca la resena de la critica: ");
 										resena = reader.nextLine();
@@ -679,7 +681,7 @@ public class Main {
 							System.out.println(buffer);
 							System.out.println("Introduzca el indice de la critica que desea votar: ");
 							index = Integer.parseInt(reader.nextLine());
-							System.out.println("Introduzca la puntuacion de su votacion: ");
+							System.out.println("Introduzca la puntuacion de su votacion (De 1 a 5): ");
 							puntuacion = Integer.parseInt(reader.nextLine());
 							System.out.println("Introduzca su correo electronico: ");
 							correo = reader.nextLine();
@@ -916,7 +918,7 @@ public class Main {
 						}
 					} while (opcion != 8);
 				}
-			} while (opcionInicio != 3 || bandera == false);
+			} while (opcionInicio != 3);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -930,7 +932,7 @@ public class Main {
 	}
 
 	public static void menuInicio() {
-		System.out.println("Elige una opcion: ");
+		System.out.println("\nElige una opcion: ");
 		System.out.println("1. Iniciar de sesion");
 		System.out.println("2. Registrarse");
 		System.out.println("3. Salir del programa");

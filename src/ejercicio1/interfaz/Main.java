@@ -175,7 +175,7 @@ public class Main {
 							System.out.println("Introduzca el titulo de la critica: ");
 							titulo = reader.nextLine();
 							if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
-								System.out.println("Introduzca la puntuacion dada al espectaculo: ");
+								System.out.println("Introduzca la puntuacion dada al espectaculo (De 1 a 10): ");
 								puntuacion = Integer.parseInt(reader.nextLine());
 								System.out.println("Introduzca la resena del espectaculo: ");
 								resena = reader.nextLine();
@@ -227,7 +227,7 @@ public class Main {
 					System.out.println(buffer);
 					System.out.println("Introduzca el indice de la critica que desea votar: ");
 					index = Integer.parseInt(reader.nextLine());
-					System.out.println("Introduzca la puntuacion de su votacion: ");
+					System.out.println("Introduzca la puntuacion de su votacion (De 1 a 5): ");
 					puntuacion = Integer.parseInt(reader.nextLine());
 					System.out.println("Introduzca su correo electronico: ");
 					correo = reader.nextLine();
@@ -272,6 +272,7 @@ public class Main {
 						else{
 							System.out.println("No tiene valoraciones actualmente.");
 						}
+						System.out.println("\n");
 					}
 					
 					break;
@@ -304,7 +305,7 @@ public class Main {
 		System.out.println("4. Consultar los datos del 1 usuario");
 		System.out.println("5. Consultar los datos de todos los usuarios");
 		System.out.println("6. Crear una critica");
-		System.out.println("7. Consultar todas las criticas disponibles");
+		System.out.println("7. Consultar todas las criticas");
 		System.out.println("8. Borrar una critica");
 		System.out.println("9. Votar la utilidad de una critica");
 		System.out.println("10. Buscar las criticas de un usuario");

@@ -26,7 +26,7 @@ public class Gestorespectaculos {
 	private ArrayList<Espectaculo> espectaculos;
 
 	private Gestorespectaculos() {
-
+		espectaculos = new ArrayList<Espectaculo>();
 	}
 
 	public static Gestorespectaculos getInstance() {
