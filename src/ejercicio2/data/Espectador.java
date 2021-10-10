@@ -122,11 +122,22 @@ public class Espectador {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	/** Este metodo devuelve la contraseña de
+	/*un usuario.
+	/*
+	/* @return contrasena
+	*/
+	
 	public String getContrasena() {
 		return contrasena;
 	}
 
+	/** Este metodo asigna la contraseña de un 
+	/* usuario.
+	/*
+	/* @return contrasena
+	*/
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
