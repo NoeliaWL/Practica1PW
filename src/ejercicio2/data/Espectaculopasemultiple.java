@@ -19,7 +19,12 @@ public class Espectaculopasemultiple extends Espectaculo {
 	public Espectaculopasemultiple() {
 		pasemultiple = new ArrayList<Sesiones>();
 	}
-
+	
+	/**Este metodo devuelve las sesiones de pase multiple
+	/*
+	/*
+	/*@return pasemultiple
+	*/
 	public ArrayList<Sesiones> getPasemultiple() {
 		return pasemultiple;
 	}
