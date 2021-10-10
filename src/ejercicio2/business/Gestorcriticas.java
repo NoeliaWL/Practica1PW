@@ -254,8 +254,8 @@ public class Gestorcriticas {
 		for (Critica c : criticas) {
 			if (c.getTituloEspectaculo().equals(titulo)) {
 				buffer.append("Indice: " + criticas.indexOf(c) + "\n");
-				buffer.append("Titulo: " + c.getTitulo() + " ");
-				buffer.append("Puntuacion: " + c.getPuntuacion());
+				buffer.append("Titulo: " + c.getTitulo() + "\n");
+				buffer.append("Puntuacion: " + c.getPuntuacion() + "\n");
 				buffer.append("Titulo Espectaculo: " + c.getTituloEspectaculo() + "\n");
 				buffer.append("Resena: " + c.getResena());
 				if (c.getValoraciones().size() != 0) {
@@ -463,7 +463,7 @@ public class Gestorcriticas {
 		File fc = new File(fileCriticas);
 		FileReader fre = null, frc = null;
 		BufferedReader buffere = null, bufferc = null;
-		String lineaFichero;
+		String lineaFichero = null;
 		String[] lineaCampos, lineaValoraciones, camposValoraciones;
 		ArrayList<Valoraciones> vals = new ArrayList<Valoraciones>();
 		Valoraciones val = new Valoraciones();
@@ -476,10 +476,13 @@ public class Gestorcriticas {
 				fre = new FileReader(fe);
 				buffere = new BufferedReader(fre);
 
+				System.out.println("buffer espectadores: " + buffere.readLine());
 				Espectador espectador;
 
 				while ((lineaFichero = buffere.readLine()) != null) {
+				//lineaFichero = buffere.readLine();
 					espectador = new Espectador();
+					System.out.println("entra");
 
 					lineaCampos = lineaFichero.split(";");
 

@@ -80,7 +80,8 @@ public class Gestorespectaculos {
 				puntual = (Espectaculopuntual) e;
 				buffer.append(
 						"Indice espectaculo: " + espectaculos.indexOf(e) + "\nTitulo: " + puntual.getTitulo() + "\n");
-				buffer.append("Indice sesion: 1 - " + puntual.getRepresentacion().getFecha() + " ");
+				buffer.append("Descripcion: " + puntual.getDescripcion() + "\n");
+				buffer.append("\tIndice sesion: 1 - " + puntual.getRepresentacion().getFecha() + " ");
 				buffer.append(puntual.getRepresentacion().getHora() + "\n");
 
 			} else if (e instanceof Espectaculopasemultiple) {
@@ -88,8 +89,9 @@ public class Gestorespectaculos {
 				multiple = (Espectaculopasemultiple) e;
 				buffer.append(
 						"Indice espectaculo: " + espectaculos.indexOf(e) + "\nTitulo: " + multiple.getTitulo() + "\n");
+				buffer.append("Descripcion: " + multiple.getDescripcion() + "\n");
 				for (Sesiones s : multiple.getPasemultiple()) {
-					buffer.append("Indice sesion: " + multiple.getPasemultiple().indexOf(s) + " - ");
+					buffer.append("\tIndice sesion: " + multiple.getPasemultiple().indexOf(s) + " - ");
 					buffer.append(s.getFecha() + " ");
 					buffer.append(s.getHora() + "\n");
 				}
@@ -98,8 +100,9 @@ public class Gestorespectaculos {
 				temporada = (Espectaculotemporada) e;
 				buffer.append(
 						"Indice espectaculo: " + espectaculos.indexOf(e) + "\nTitulo: " + temporada.getTitulo() + "\n");
+				buffer.append("Descripcion: " + temporada.getDescripcion() + "\n");
 				for (Sesiones s : temporada.getTemporada()) {
-					buffer.append("Indice sesion: " + temporada.getTemporada().indexOf(s) + " - ");
+					buffer.append("\tIndice sesion: " + temporada.getTemporada().indexOf(s) + " - ");
 					buffer.append(s.getFecha() + " ");
 					buffer.append(s.getHora() + "\n");
 				}
@@ -116,8 +119,9 @@ public class Gestorespectaculos {
 			Espectaculopasemultiple multiple = (Espectaculopasemultiple) espectaculos.get(index);
 			buffer.append(
 					"Indice espectaculo: " + index + "\nTitulo: " + multiple.getTitulo() + "\n");
+			buffer.append("Descripcion: " + multiple.getDescripcion() + "\n");
 			for (Sesiones s : multiple.getPasemultiple()) {
-				buffer.append("Indice sesion: " + multiple.getPasemultiple().indexOf(s) + " - ");
+				buffer.append("\nIndice sesion: " + multiple.getPasemultiple().indexOf(s) + " - ");
 				buffer.append(s.getFecha() + " ");
 				buffer.append(s.getHora() + "\n");
 			}
@@ -245,7 +249,7 @@ public class Gestorespectaculos {
 	public String Buscarespectaculo(Categoriaevento categoria) {
 		StringBuffer buffer = new StringBuffer();
 		for (Espectaculo e : espectaculos) {
-			if (e.getCategoria().equals(categoria) && e instanceof Espectaculopuntual) {
+			if (e.getCategoria() == categoria && e instanceof Espectaculopuntual) {
 				Espectaculopuntual puntual = (Espectaculopuntual) e;
 				buffer.append("Titulo:" + puntual.getTitulo() + "\n");
 				buffer.append("Descripcion:" + puntual.getDescripcion() + "\n");
@@ -264,7 +268,7 @@ public class Gestorespectaculos {
 					buffer.append(s.getHora() + "\n");
 				}
 			} else if (e.getCategoria().equals(categoria) && e instanceof Espectaculotemporada) {
-				Espectaculotemporada temporada = (Espectaculotemporada) e;
+				Espectaculotemporada temporada = (Espectaculotemporada) e;				
 				buffer.append("Titulo:" + temporada.getTitulo() + "\n");
 				buffer.append("Descripcion:" + temporada.getDescripcion() + "\n");
 				buffer.append("Categoria:" + temporada.getCategoria() + "\n");
@@ -465,13 +469,13 @@ public class Gestorespectaculos {
 					
 					puntual.setTitulo(lineaCampos[0]);
 					puntual.setDescripcion(lineaCampos[1]);
-					if(lineaCampos[2] == "MONOLOGO"){
+					if(lineaCampos[2].equals("MONOLOGO")){
 						puntual.setCategoriaevento(Categoriaevento.MONOLOGO);
 					}
-					else if(lineaCampos[2] == "CONCIERTO"){
+					else if(lineaCampos[2].equals("CONCIERTO")){
 						puntual.setCategoriaevento(Categoriaevento.CONCIERTO);
 					}
-					else if(lineaCampos[2] == "OBRADETEATRO"){
+					else if(lineaCampos[2].equals("OBRADETEATRO")){
 						puntual.setCategoriaevento(Categoriaevento.OBRADETEATRO);
 					}
 					sesion.setFecha(LocalDate.parse(lineaCampos[3]));
@@ -498,13 +502,13 @@ public class Gestorespectaculos {
 					
 					multiple.setTitulo(lineaCampos[0]);
 					multiple.setDescripcion(lineaCampos[1]);
-					if(lineaCampos[2] == "MONOLOGO"){
+					if(lineaCampos[2].equals("MONOLOGO")){
 						multiple.setCategoriaevento(Categoriaevento.MONOLOGO);
 					}
-					else if(lineaCampos[2] == "CONCIERTO"){
+					else if(lineaCampos[2].equals("CONCIERTO")){
 						multiple.setCategoriaevento(Categoriaevento.CONCIERTO);
 					}
-					else if(lineaCampos[2] == "OBRADETEATRO"){
+					else if(lineaCampos[2].equals("OBRADETEATRO")){
 						multiple.setCategoriaevento(Categoriaevento.OBRADETEATRO);
 					}
 					
@@ -537,13 +541,13 @@ public class Gestorespectaculos {
 					
 					temporada.setTitulo(lineaCampos[0]);
 					temporada.setDescripcion(lineaCampos[1]);
-					if(lineaCampos[2] == "MONOLOGO"){
+					if(lineaCampos[2].equals("MONOLOGO")){
 						temporada.setCategoriaevento(Categoriaevento.MONOLOGO);
 					}
-					else if(lineaCampos[2] == "CONCIERTO"){
+					else if(lineaCampos[2].equals("CONCIERTO")){
 						temporada.setCategoriaevento(Categoriaevento.CONCIERTO);
 					}
-					else if(lineaCampos[2] == "OBRADETEATRO"){
+					else if(lineaCampos[2].equals("OBRADETEATRO")){
 						temporada.setCategoriaevento(Categoriaevento.OBRADETEATRO);
 					}
 					
