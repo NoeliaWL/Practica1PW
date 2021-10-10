@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Clase Critica Esta clase maneja la informacion necesario sobre la critica de
  * un espectaculo.
  * 
- * @author Noelia Hinojosa Sanchez
+ * @author Noelia Hinojosa Sanchez, Rafael Piqueras Espinar
  * @version 1.0, 24/09/2021
  */
 public class Critica {
@@ -92,7 +92,7 @@ public class Critica {
 	/**
 	 * Este metodo devuelve el comentario del espectaculo.
 	 * 
-	 * @return El comentario del epsect·culo.
+	 * @return El comentario del epsect√°culo.
 	 */
 	public String getResena() {
 		return resena;
@@ -101,7 +101,7 @@ public class Critica {
 	/**
 	 * Este metodo asigna el comentario del espectaculo.
 	 * 
-	 * @param reseÒa
+	 * @param rese√±a
 	 *            Comentario del espectaculo.
 	 * @return Nada.
 	 */
@@ -130,7 +130,7 @@ public class Critica {
 	}
 
 	/**
-	 * Este metodo devuelve el correo elÈctronico del usuario que creo la
+	 * Este metodo devuelve el correo el√©ctronico del usuario que creo la
 	 * critica.
 	 * 
 	 * @return Correo electronico del usuario que genero la critica.

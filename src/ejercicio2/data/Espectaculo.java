@@ -4,7 +4,7 @@ package ejercicio2.data;
  * Clase Espectaculo tiene todos los metodos para gestionar los datos de un
  * espectaculo.
  * 
- * @author Rafael Piqueras Espinar
+ * @author Rafael Piqueras Espinar, Noelia Hinojosa Sanchez
  *
  */
 
@@ -63,7 +63,7 @@ public class Espectaculo {
 	/**
 	 * Este metodo devuelve la categoria que tiene el espectaculo
 	 * 
-	 * @return
+	 * @return Categoria
 	 */
 
 	public Categoriaevento getCategoria() {
