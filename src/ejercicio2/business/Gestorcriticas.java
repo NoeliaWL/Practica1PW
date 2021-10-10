@@ -247,7 +247,11 @@ public class Gestorcriticas {
 
 		return buffer.toString();
 	}
-
+	/**
+	/*Este metodo devuelve las criticas de un titulo en concreto
+	/*@return buffer con todos los datos de la critica de ese titulo
+	/*@author 
+	*/
 	public String getCriticasTitulo(String titulo) {
 		StringBuffer buffer = new StringBuffer();
 		int media = 0;
@@ -552,7 +556,11 @@ public class Gestorcriticas {
 			}
 		}
 	}
-
+	/**Este metodo devule el usuario que se ha logeado con la contraseña
+	/* y el correo.
+	/*@return Usuario logeado
+	/*@author Noelia Hinojosa Sanchez
+	*/
 	public TipoUsuario Loginusuario(String correo, String contrasena) {
 		TipoUsuario usuario = TipoUsuario.DEFAULT;
 		for (Espectador e : espectadores) {
@@ -565,7 +573,12 @@ public class Gestorcriticas {
 		}
 		return usuario;
 	}
-
+	/**Este metodo comprueba el propieratio del correo
+	/*
+	/*@return Bandera true si es el propietario del correo
+	/* en caso contrario devuelve false;
+	/*@author Noelia Hinojosa Sanchez
+	*/
 	public Boolean comprobarPropietario(String correo) {
 		Boolean bandera = false;
 
