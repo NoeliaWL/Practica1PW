@@ -591,6 +591,12 @@ public class Gestorcriticas {
 
 		return bandera;
 	}
+	/**Este metodo comprueba si el titulo de la critica esta registrado.
+	/*
+	/*@return Bandera true si el titulo de la critica esta registrado
+	/* si no devuelve false
+	/*@authora Noelia Hinojosa Sanchez
+	*/
 	
 	public Boolean tituloCriticaRegistrado(String titulo){
 		Boolean bandera = false;
