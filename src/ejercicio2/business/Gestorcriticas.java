@@ -476,13 +476,10 @@ public class Gestorcriticas {
 				fre = new FileReader(fe);
 				buffere = new BufferedReader(fre);
 
-				System.out.println("buffer espectadores: " + buffere.readLine());
 				Espectador espectador;
 
 				while ((lineaFichero = buffere.readLine()) != null) {
-				//lineaFichero = buffere.readLine();
 					espectador = new Espectador();
-					System.out.println("entra");
 
 					lineaCampos = lineaFichero.split(";");
 
@@ -491,10 +488,10 @@ public class Gestorcriticas {
 					espectador.setUsuario(lineaCampos[2]);
 					espectador.setCorreo(lineaCampos[3]);
 					espectador.setContrasena(lineaCampos[4]);
-					if(lineaCampos[5] == "ADMINISTRADOR"){
+					if(lineaCampos[5].equals("ADMINISTRADOR")){
 						espectador.setTipo(TipoUsuario.ADMINISTRADOR);
 					}
-					else if(lineaCampos[5] == "ESPECTADOR"){
+					else if(lineaCampos[5].equals("ESPECTADOR")){
 						espectador.setTipo(TipoUsuario.ESPECTADOR);
 					}
 

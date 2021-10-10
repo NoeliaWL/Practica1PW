@@ -53,9 +53,7 @@ public class Main {
 			}
 			prop.load(lector);
 			gestorespectaculos.cargarFichero(prop.getProperty("ESPECTACULOSPUNTUALES"), prop.getProperty("ESPECTACULOSPASEMULTIPLE"), prop.getProperty("ESPECTACULOSTEMPORADA"));
-			//gestorcriticas.cargarFichero(prop.getProperty("CRITICAS"), prop.getProperty("ESPECTADORES"));
-
-			//gestorcriticas.consultarDatosUsuarios();
+			gestorcriticas.cargarFichero(prop.getProperty("CRITICAS"), prop.getProperty("ESPECTADORES"));
 			
 			do {
 				bandera = false;
@@ -201,7 +199,6 @@ public class Main {
 									hora = reader.nextLine();
 									sesion.setFecha(LocalDate.parse(fecha));
 									sesion.setHora(LocalTime.parse(hora));
-									System.out.println("Espectaculo puntual: " + sesion.getFecha() + " - " + sesion.getHora());
 									gestorespectaculos.Altaespectaculopasepuntual(titulo, descripcion, categoria, sesion);
 								}
 								else{

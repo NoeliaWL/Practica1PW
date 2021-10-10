@@ -5,7 +5,7 @@ public class Espectaculopuntual extends Espectaculo {
 	Sesiones representacion;
 
 	public Espectaculopuntual() {
-
+		representacion = new Sesiones();
 	}
 
 	public Sesiones getRepresentacion() {

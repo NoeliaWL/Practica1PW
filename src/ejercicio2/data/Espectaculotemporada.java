@@ -10,7 +10,6 @@ public class Espectaculotemporada extends Espectaculo {
 
 	public Espectaculotemporada() {
 		temporada = new ArrayList<Sesiones>();
-
 	}
 
 	public void Calcularfecha(LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
