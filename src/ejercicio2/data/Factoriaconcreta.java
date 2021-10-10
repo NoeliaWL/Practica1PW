@@ -4,9 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/** Clase Factoria 
+/*
+/*
+*/
+
+
 public class Factoriaconcreta implements IFactoria {
 
 	@Override
+	/** Este metodo crea est
+	/*
+	/*
+	*/
 	public Espectaculopuntual createEspectaculoPuntual(String titulo, String descripcion, Categoriaevento categoria,
 			Sesiones sesion) {
 		// TODO Auto-generated method stub
