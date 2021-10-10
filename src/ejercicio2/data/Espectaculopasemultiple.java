@@ -28,6 +28,10 @@ public class Espectaculopasemultiple extends Espectaculo {
 	public ArrayList<Sesiones> getPasemultiple() {
 		return pasemultiple;
 	}
+	/**Este metodo asigna una lista de pase multiple
+	/*
+	/*@param pasemultiple
+	*/
 
 	public void setPasemultiple(ArrayList<Sesiones> pasemultiple) {
 		this.pasemultiple = pasemultiple;
