@@ -3,8 +3,8 @@ package ejercicio2.data;
 import java.util.ArrayList;
 
 
-/**Esta clase 
-/*
+/**Clase Espectaculopasemultiple que controla las sesiones de esta
+/*clase de espectaculo.
 /*@authores Noelia Hinojosa Sanchez, Rafael Piqueras Espinar
 */
 public class Espectaculopasemultiple extends Espectaculo {
