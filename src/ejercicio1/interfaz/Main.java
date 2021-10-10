@@ -102,37 +102,39 @@ public class Main {
 
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
-							nombre = ""; apellidos = ""; nick = "";
-							do{
+							nombre = "";
+							apellidos = "";
+							nick = "";
+							do {
 								menuActualizar();
 								opcion = Integer.parseInt(reader.nextLine());
-								
-								switch(opcion){
-									case 1:
-										System.out.println("Introduzca su nuevo nombre: ");
-										nombre = reader.nextLine().toUpperCase();
-										System.out.println(nombre);
-										break;
-										
-									case 2:
-										System.out.println("Introduzca sus nuevos apellidos: ");
-										apellidos = reader.nextLine().toUpperCase();
-										break;
-										
-									case 3:
-										System.out.println("Introduzca su nuevo nick(nombre de usuario): ");
-										nick = reader.nextLine();
-										System.out.println(nick);
-										break;
-										
-									case 4:
-										System.out.println("Actualizacion terminada.");
-										break;
-									
-									default:
-										System.out.println("Opcion no valida, introduzca otra opcion.");
+
+								switch (opcion) {
+								case 1:
+									System.out.println("Introduzca su nuevo nombre: ");
+									nombre = reader.nextLine().toUpperCase();
+									System.out.println(nombre);
+									break;
+
+								case 2:
+									System.out.println("Introduzca sus nuevos apellidos: ");
+									apellidos = reader.nextLine().toUpperCase();
+									break;
+
+								case 3:
+									System.out.println("Introduzca su nuevo nick(nombre de usuario): ");
+									nick = reader.nextLine();
+									System.out.println(nick);
+									break;
+
+								case 4:
+									System.out.println("Actualizacion terminada.");
+									break;
+
+								default:
+									System.out.println("Opcion no valida, introduzca otra opcion.");
 								}
-							}while(opcion != 4);
+							} while (opcion != 4);
 							gestorcriticas.actualizarDatosUsuario(nombre, apellidos, nick, correo);
 						} else {
 							System.out.println("Correo electronico no registrado");
@@ -165,7 +167,7 @@ public class Main {
 					buffer = gestorcriticas.consultarDatosUsuarios();
 					System.out.println(buffer);
 					break;
-					
+
 				case 6:
 					System.out.println("Introduzca su correo electronico: ");
 					correo = reader.nextLine();
@@ -174,15 +176,14 @@ public class Main {
 						if (gestorcriticas.correoRegistrado(correo)) {
 							System.out.println("Introduzca el titulo de la critica: ");
 							titulo = reader.nextLine();
-							if(!gestorcriticas.tituloCriticaRegistrado(titulo)){
+							if (!gestorcriticas.tituloCriticaRegistrado(titulo)) {
 								System.out.println("Introduzca la puntuacion dada al espectaculo (De 1 a 10): ");
 								puntuacion = Integer.parseInt(reader.nextLine());
 								System.out.println("Introduzca la resena del espectaculo: ");
 								resena = reader.nextLine();
 
 								gestorcriticas.creaCritica(titulo, puntuacion, resena, correo);
-							}
-							else{
+							} else {
 								System.out.println("Titulo de critica ya registrado.");
 							}
 						} else {
@@ -201,14 +202,13 @@ public class Main {
 				case 8:
 					System.out.println("Introduzca su correo electronico: ");
 					correo = reader.nextLine();
-					
+
 					if (gestorcriticas.comprobarFormatoCorreo(correo)) {
 						if (gestorcriticas.correoRegistrado(correo)) {
 							buffer = gestorcriticas.getCriticasUsuario(correo);
-							if(buffer == null){
+							if (buffer == null) {
 								System.out.println("No tiene criticas creadas.");
-							}
-							else{
+							} else {
 								System.out.println(buffer);
 								System.out.println("\nIntroduce el indice de la critica a borrar: ");
 								index = Integer.parseInt(reader.nextLine());
@@ -256,33 +256,32 @@ public class Main {
 					} else {
 						System.out.println("Formato de usuario no valido");
 					}
-					
-					for(Critica c : listacriticas){
+
+					for (Critica c : listacriticas) {
 						System.out.print(listacriticas.indexOf(c) + " ");
 						System.out.print("Titulo: " + c.getTitulo() + " ");
 						System.out.println("Puntuacion: " + c.getPuntuacion());
 						System.out.println("Resena: " + c.getResena());
-						if(c.getValoraciones().size() != 0){
+						if (c.getValoraciones().size() != 0) {
 							for (Valoraciones v : c.getValoraciones()) {
 								media += v.getValoracion();
 							}
 							media /= c.getValoraciones().size();
 							System.out.println("Media de las valoraciones: " + media);
-						}
-						else{
+						} else {
 							System.out.println("No tiene valoraciones actualmente.");
 						}
 						System.out.println("\n");
 					}
-					
+
 					break;
-					
+
 				case 11:
 					System.out.println("Programa terminado.");
 					break;
 				}
 			} while ((numero >= 1) && (numero <= 10) || (numero != 11));
-			
+
 			gestorcriticas.guardarFichero(prop.getProperty("CRITICAS"), prop.getProperty("ESPECTADORES"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -311,8 +310,8 @@ public class Main {
 		System.out.println("10. Buscar las criticas de un usuario");
 		System.out.println("11. Salir");
 	}
-	
-	public static void menuActualizar(){
+
+	public static void menuActualizar() {
 		System.out.println("\nElige que dato desea modificar:");
 		System.out.println("1. Nombre");
 		System.out.println("2. Apellidos");

@@ -111,6 +111,13 @@ public class Gestorcriticas {
 		return usuario;
 	}
 
+	/**
+	 * Este metodo hace una consulta sobre todos los datos de los usuarios
+	 * registrados. Devuelve una cadena con todos los datos formateados.
+	 * 
+	 * @return String con los datos.
+	 * @author Noelia Hinojosa Sanchez
+	 */
 	public String consultarDatosUsuarios() {
 		StringBuffer buffer = new StringBuffer();
 
@@ -508,16 +515,24 @@ public class Gestorcriticas {
 			}
 		}
 	}
-	
-	public Boolean tituloCriticaRegistrado(String titulo){
+
+	/**
+	 * Este metodo comprueba la unicidad de un titulo de una critica.
+	 * 
+	 * @param titulo
+	 *            Titulo de la critica a comprobar
+	 * @return True si el titulo ya esta registrado.
+	 * @author Noelia Hinojosa Sanchez
+	 */
+	public Boolean tituloCriticaRegistrado(String titulo) {
 		Boolean bandera = false;
-		
-		for(Critica c : criticas){
-			if(c.getTitulo().equals(titulo)){
+
+		for (Critica c : criticas) {
+			if (c.getTitulo().equals(titulo)) {
 				bandera = true;
 			}
 		}
-		
+
 		return bandera;
 	}
 }

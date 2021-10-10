@@ -117,6 +117,13 @@ public class Gestorcriticas {
 		return usuario;
 	}
 
+	/**
+	 * Este metodo hace una consulta sobre todos los datos de los usuarios
+	 * registrados. Devuelve una cadena con todos los datos formateados.
+	 * 
+	 * @return String con los datos.
+	 * @author Noelia Hinojosa Sanchez
+	 */
 	public String consultarDatosUsuarios() {
 		StringBuffer buffer = new StringBuffer();
 
@@ -248,6 +255,13 @@ public class Gestorcriticas {
 		return buffer.toString();
 	}
 
+	/**
+	 * Este metodo devuelve todas las criticas guardadas en el sistema de un
+	 * espectaculo concreto, para posteriormente mostrarselas al usuario.
+	 * 
+	 * @return Lista con todas las criticas de un espectaculo del sistema.
+	 * @author Noelia Hinojosa Sanchez
+	 */
 	public String getCriticasTitulo(String titulo) {
 		StringBuffer buffer = new StringBuffer();
 		int media = 0;
@@ -281,7 +295,6 @@ public class Gestorcriticas {
 	 *            Borra una critica.
 	 * @author Rafael Piqueras Espinar
 	 */
-
 	public void borraCritica(int index) {
 		criticas.remove(index);
 	}
@@ -319,7 +332,6 @@ public class Gestorcriticas {
 	 * @return lista con las criticas de un usuario.
 	 * @autor Rafael Piquers Espinar
 	 */
-
 	public ArrayList<Critica> buscaCritica(String correo) {
 		ArrayList<Critica> criticaUsuario = new ArrayList<Critica>();
 		for (Critica e : criticas)
@@ -488,10 +500,9 @@ public class Gestorcriticas {
 					espectador.setUsuario(lineaCampos[2]);
 					espectador.setCorreo(lineaCampos[3]);
 					espectador.setContrasena(lineaCampos[4]);
-					if(lineaCampos[5].equals("ADMINISTRADOR")){
+					if (lineaCampos[5].equals("ADMINISTRADOR")) {
 						espectador.setTipo(TipoUsuario.ADMINISTRADOR);
-					}
-					else if(lineaCampos[5].equals("ESPECTADOR")){
+					} else if (lineaCampos[5].equals("ESPECTADOR")) {
 						espectador.setTipo(TipoUsuario.ESPECTADOR);
 					}
 
@@ -553,6 +564,16 @@ public class Gestorcriticas {
 		}
 	}
 
+	/**
+	 * Este metodo hace el login de los usuarios en el sistema.
+	 * 
+	 * @param correo
+	 *            Correo electronico del usuario.
+	 * @param contrasena
+	 *            Contrasena del usuario.
+	 * @return El tipo de usuario que realiza el login (Administrador o
+	 *         Espectador).
+	 */
 	public TipoUsuario Loginusuario(String correo, String contrasena) {
 		TipoUsuario usuario = TipoUsuario.DEFAULT;
 		for (Espectador e : espectadores) {
@@ -566,6 +587,15 @@ public class Gestorcriticas {
 		return usuario;
 	}
 
+	/**
+	 * Este metodo comprueba que el correo pasado sea el del propietario de una
+	 * critica.
+	 * 
+	 * @param correo
+	 *            Correo electronico a comprobar
+	 * @return True si el correo pasado es del propietario de la critica.
+	 * @author Noelia Hinojosa Sanchez
+	 */
 	public Boolean comprobarPropietario(String correo) {
 		Boolean bandera = false;
 
@@ -577,16 +607,24 @@ public class Gestorcriticas {
 
 		return bandera;
 	}
-	
-	public Boolean tituloCriticaRegistrado(String titulo){
+
+	/**
+	 * Este metodo comprueba la unicidad de un titulo de una critica.
+	 * 
+	 * @param titulo
+	 *            Titulo de la critica a comprobar
+	 * @return True si el titulo ya esta registrado.
+	 * @author Noelia Hinojosa Sanchez
+	 */
+	public Boolean tituloCriticaRegistrado(String titulo) {
 		Boolean bandera = false;
-		
-		for(Critica c : criticas){
-			if(c.getTitulo().equals(titulo)){
+
+		for (Critica c : criticas) {
+			if (c.getTitulo().equals(titulo)) {
 				bandera = true;
 			}
 		}
-		
+
 		return bandera;
 	}
 }

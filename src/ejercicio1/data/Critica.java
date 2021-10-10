@@ -40,16 +40,19 @@ public class Critica {
 	private String correoPropietario;
 
 	/**
+	 * Constructor de la clase Critica.
+	 */
+	public Critica() {
+		valoraciones = new ArrayList<Valoraciones>();
+	}
+
+	/**
 	 * Este metodo devuelve el titulo de la critica.
 	 * 
 	 * @return El titulo de la critica.
 	 */
 	public String getTitulo() {
 		return titulo;
-	}
-	
-	public Critica(){
-		valoraciones = new ArrayList<Valoraciones>();
 	}
 
 	/**
