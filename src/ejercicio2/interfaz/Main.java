@@ -13,6 +13,12 @@ import ejercicio2.data.Categoriaevento;
 import ejercicio2.data.Sesiones;
 import ejercicio2.data.TipoUsuario;
 
+/**
+ * Clase Main Esta clase prueba la funcionalidad del gestor.
+ * 
+ * @author Noelia Hinojosa Sanchez
+ * @version 1.0, 10/10/2021
+ */
 public class Main {
 
 	public static void main(String[] args) {
