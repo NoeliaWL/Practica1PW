@@ -1,5 +1,10 @@
 package ejercicio2.data;
 
+/**Clase Espectaculopuntual controla las sesiones y representaciones de 
+/*esta clase de espectaculos.
+/*
+*/
+
 public class Espectaculopuntual extends Espectaculo {
 
 	Sesiones representacion;
