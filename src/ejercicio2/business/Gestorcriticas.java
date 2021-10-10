@@ -401,6 +401,7 @@ public class Gestorcriticas {
 	 * @param fileEspectadores
 	 *            Ubicacion del archivo donde guardar los espectadores.
 	 * @return Nada.
+	 /*@authora Noelia Hinojosa Sanchez
 	 */
 	public void guardarFichero(String fileCriticas, String fileEspectadores) {
 		FileWriter fc = null, fe = null;
